@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c16bn1jtiqhig"]
+[gd_scene load_steps=3 format=3 uid="uid://c16bn1jtiqhig"]
+
+[ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://prefabs/Player.cs" id="1_72ieh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
 
 [node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_72ieh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_fp3wc")
