@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c16bn1jtiqhig"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
+
+[node name="Player" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_fp3wc")
+debug_color = Color(0, 0.595, 0.7, 1)

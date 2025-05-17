@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://rop4mdjkcm0p"]
+
+[ext_resource type="PackedScene" uid="uid://c16bn1jtiqhig" path="res://prefabs/player.tscn" id="1_xijx7"]
+[ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://prefabs/Player.cs" id="2_0afsd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xijx7"]
+
+[sub_resource type="Sky" id="Sky_0afsd"]
+sky_material = SubResource("ProceduralSkyMaterial_xijx7")
+
+[sub_resource type="Environment" id="Environment_bgcxa"]
+background_mode = 1
+sky = SubResource("Sky_0afsd")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3y7o3"]
+
+[node name="Forest" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bgcxa")
+
+[node name="Obstacles" type="Node" parent="."]
+
+[node name="WorldFloor" type="StaticBody3D" parent="Obstacles"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/WorldFloor"]
+shape = SubResource("WorldBoundaryShape3D_3y7o3")
+debug_color = Color(0, 1, 0.333333, 1)
+
+[node name="Entities" type="Node" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_xijx7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76662, 1.01011, 2.22057)
+script = ExtResource("2_0afsd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.815057, 0.579381, 0, -0.579381, 0.815057, 4.76837e-07, 7.13607, 8.00928)
