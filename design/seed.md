@@ -16,6 +16,10 @@ The name *Blind Nature* refers to experiencing nature as a blind person, but als
 		- [World Setup](#world-setup)
 		- [The Forest Network](#the-forest-network)
 		- [Orientation](#orientation)
+		- [Eye Of The Forest: Kestrel](#eye-of-the-forest-kestrel)
+		- [Echo-Location Focus System](#echo-location-focus-system)
+		- [Aim-Feedback System](#aim-feedback-system)
+	- [Demo 1](#demo-1)
 
 ## Story
 
@@ -56,4 +60,62 @@ The paths between junctions do not have to be as recognizable as the junctions t
 
 ![](res/network.png)
 
+Kestrel will always navigate the player across this network to reach other locations. If Liora is not on a path already, then Kestrel will first guide Liora to the nearest path and continue from there.
+
 ### Orientation
+
+The problem of orientation is to give the player an idea of where they are in the game world. This requires that players can at the very least identify unique details of their current environment. Below I enumerate some ways to strengthen orientation.
+
+1. *Distinct soundscape*
+	* Nearby streams or waterfalls.
+	* Unique species of birds living specifically in this area.
+	* Sound when walking over the ground (grass, dirt, rock).
+
+2. *Player-made guidance cues*
+	
+	We can let the player craft sound emitters from natural materials like wood bells, ticking sounds, rustling sounds, whistles etc. If the player has trouble identifying a location, they can choose to permanently place down one of these guidance cues. This can also be done with vibration-based cues like a tremor-generating machine.
+
+	I particularly like this idea because it gives control back to the player to make their orientation more efficient. It can be very satisfying to successfully navigate with cues placed by yourself! Having too many cues is no longer benefical, and we can also choose to destroy cues under certain conditions.
+
+3. *Liora narrating what she feels and smells*
+
+	For some areas, it can be helpful to verbally narrate senses that we can not communicate through the game. If the area feels cold, we can have her say that. If there is a rotting tree nearby, she can mention that too. This is a minor thing and we can't rely on it too much, but in certain areas it can add the extra detail and personality.
+
+4. *Touching system*
+
+	To pair with point (3), we can implement a system where Liora instinctively touches nearby objects and describes how they feel. This can be complemented with a vibration cue when there is contact. This way we can communicate tree, rocks, monuments and other silent-standing objects.
+
+	For example, if the player detects a statue using the [Echo-location focus system](#echo-location-focus-system), they can have it described by Liora who could say "It is in the shape of a man wielding a trident". That would be key information to pinpoint the location.
+
+### Eye Of The Forest: Kestrel
+
+Kestrel is the companion bird of Liora. In this game, it functions as a quest-giver when it spots anything unusual in the forest. Through Kestrel, we can lead Liora to key locations in the game and make events happen there. Kestrel will guide Liora along the paths using the [Forest Network](#the-forest-network) mentioned earlier. Besides acting like a navigator, we can add some other features and subtle interactions here.
+
+- Having Kestrel assist while aiming with a bow, giving sound feedback together with the vibrations when going in the right direction.
+- Ask Kestrel to search the nearby area for certain herbs or resources.
+- Ask Kestrel to fetch something by itself.
+- Ask Kestrel to navigate to a previously visited junction.
+- Pet and feed Kestrel.
+
+### Echo-Location Focus System
+
+W.I.P: A system for short-term sensing of objects by making silent objects emit distinct sound cues while silencing all other sounds in a focus-mode. This is not part of the demo.
+
+### Aim-Feedback System
+
+This game expands upon [the demo I created on vibration-based aiming](https://arceryz.itch.io/blind-aiming). The key idea is to give a strong cue (vibration/audio) when the player is shifting their aim *towards* the target, and to gradually give a weaker cue if they go the wrong direction. The above demo used only vibration for directional cues, but combining vibration with audio gives a stronger effect. Kestrel will play a distinct sound when the aim is on-target. This is when the arrow can be released.
+
+![](res/aiming.png)
+
+
+## Demo 1
+
+For the first demo, we want to test:
+
+1. The navigation system with Kestrel.
+2. The aiming system with vibration and Kestrel.
+3. How oriented we are when trying to understand where we are.
+
+Therefore we set up the world as follows: Liora wakes up and leaves the hut. She tells Kestrel that she wants to practice archery. Kestrel will guide her to three archery targets throughout the map. When Liora is the right distance away from the target, Kestrel will give a sound cue.
+
+Once Liora hit the target, Kestrel continues. Once all three targets are hit, Kestrel will chill in a nearby tree and Liora can explore on her own. Then, by calling Kestrel, Liora can ask him to guide her back towards the hut. The demo is now complete.
