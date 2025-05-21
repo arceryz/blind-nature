@@ -25,24 +25,23 @@ The name *Blind Nature* refers to experiencing nature as a blind person, but als
 
 ### A Blind World
 
-Liora is a young woman aged (20-30) that wakes up in a forest hut. She has never been here before, and does not remember anything of her past, except that she is blind. Inside the hut is her bed, some pots for cooking, and a bow-and-arrow with a quiver full of arrows.
+Liora is a young woman aged (20-30) that wakes up in a forest hut. She has never been here before, and she does not remember anything of her past, except that she is blind. Inside the hut is a bed, some pots for cooking, and a bow-and-arrow with a quiver full of arrows.
 
-As Liora steps outside, she struggles walk due to her blindness. In the distance she can hear a screech of a *Kestrel* (a small falcon-like predatory bird). Kestrels lands a few feet in front of her and repeats chirping sounds. Liora, surprised by the noises of a bird, follows the sound and approaches Kestrel. As the sound gets stronger, Kestrel flies a few meters further to a different spot. In this way, Liora learns of the existence of a path that Kestrel is guiding her through.
+As Liora steps outside, she struggles to walk due to her blindness. In the distance she can hear a screech of a *Kestrel* (a small falcon-like predatory bird). This bird she calls Kestrel. Kestrel lands a few feet in front of her and starts making chirping sounds. Liora, surprised by the noises of the bird, moves towards the sound and approaches Kestrel. As the sound gets stronger, Kestrel flies a few meters further to a different spot. In this way, Liora learns of the existence of a path that Kestrel is guiding her through.
 
 Liora grows accustomed to the forest through the help of Kestrel. While she can't see, Kestrel can. When Kestrel spots an interesting area in the forest, he will alert Liora and guide her there. She also learned to aim with her bow with the assistance of Kestrel. When Liora is aiming on target, Kestrel makes a slight noise. 
 
 ### Threats To The Forest
 
-On one day, while Liora is exploring the forest with Kestrel, she finds a recorder with a single tape on the inside. This tape describes the forest through the eyes of an adventurer that came her long before. "Birds with shimmering blue hues on their feathers. Flowers in any color imaginable". The adventurer goes on explaining how each flower smells different, which birds make which sounds, and the other living animals in the forest. For Liora, these descriptions add much "color" to her imagination of the world around her.
+One day while Liora is exploring the forest with Kestrel, she finds a recorder with a single tape on the inside. This tape describes the forest through the eyes of an adventurer that came here long before. "Birds with shimmering blue hues on their feathers. Flowers in any color imaginable". The adventurer goes on explaining how each flower smells different, which birds make which sounds, and which other animals live in the forest. For Liora, these descriptions strengthen her imagination of the world around her.
 
-Later, Kestrel comes to Liora with a concerning message: A sick tree. As Liora makes her way to the place, a putrid scent from the tree becomes very evident. The tree is rotting, but the cause seems to be unknown. Using a combination of special herbs, she creates a mixture and uses it to treat the tree.
+Later, Kestrel comes to Liora with a concerning message: A sick tree. As Liora makes her way to the place, a putrid scent from the tree becomes very evident. The tree is rotting, but the cause seems to be unknown. Using a combination of special herbs, she creates a mixture and uses it to heal the tree.
 
-In the night, Liora is woken by Kestrel due to a strange "creature" wandering in the forest. This creature is a formless spirit. A cloud of smoke that can assume any form it wants. Regular spirits are not engulfed in a cloud of smoke. The same stench comes from the smoke as the rotten tree from before. Liora prepares her arrow with the same medicinal mixture and fires loose at the formless spirit. The spirit lets out a screech and evaporates back into the sky.
+In that same night, Liora is woken by Kestrel due to a strange "creature" wandering in the forest. This creature is a formless spirit. A cloud of smoke that can assume any form it wants. Regular spirits are not engulfed in a cloud of smoke. The same stench comes from this formless spirit as from the rotten tree of before. Liora prepares her arrow with the same medicinal mixture and fires loose at the spirit. The spirit lets out a screech and evaporates back into the sky.
 
 ### To Heal A Wound
 
-After the events with the formless spirit, Liora sets out to understand the anger of the spirits. 
-
+After the events with the formless spirit, Liora sets out to understand the anger of the spirits. W.I.P 
 
 ## Gameplay
 
@@ -54,7 +53,7 @@ The entire game world is a 3D scene **without visuals**. There are trees, bushes
 
 ### The Forest Network
 
-Because navigating an arbitrary forest without guidance is hard (even as a sighted person!), the entire world map is covered by a network of junctions and paths. A junction *can* be a key location in the map. The area around a junction should be as unique as possible to aid in orientation (more details in [Orientation](#orientation)).
+Because navigating an arbitrary forest without guidance is hard (even as a sighted person!), the entire world map is covered by a network of junctions and paths. A key location in the map should have a nearby junction. The area around a junction should be as unique as possible to aid in orientation (more details in [Orientation](#orientation)).
 
 The paths between junctions do not have to be as recognizable as the junctions themselves, but some small details can be added. The whole essence of the network is to provide **known routes to fall back on** during exploration.
 
@@ -79,7 +78,7 @@ The problem of orientation is to give the player an idea of where they are in th
 
 3. *Liora narrating what she feels and smells*
 
-	For some areas, it can be helpful to verbally narrate senses that we can not communicate through the game. If the area feels cold, we can have her say that. If there is a rotting tree nearby, she can mention that too. This is a minor thing and we can't rely on it too much, but in certain areas it can add the extra detail and personality.
+	For some areas, it can be helpful to verbally narrate senses that we can not communicate through the gameplay itself. If the area feels cold, we can have her say that. If the smell of a rotting tree is present, she can mention that too. This can add the extra detail and personality to certain areas.
 
 4. *Touching system*
 
