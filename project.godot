@@ -13,7 +13,7 @@ config_version=5
 config/name="Blind Nature"
 run/main_scene="uid://rop4mdjkcm0p"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://2b4nyla8ovbj"
 
 [display]
 
@@ -24,6 +24,13 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Blind Nature"
+
+[file_customization]
+
+folder_colors={
+"res://prefabs/": "orange",
+"res://scripts/": "red"
+}
 
 [input]
 
