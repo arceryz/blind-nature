@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://rop4mdjkcm0p"]
+[gd_scene load_steps=24 format=3 uid="uid://rop4mdjkcm0p"]
 
 [ext_resource type="Material" uid="uid://drxc4hg7i4uuw" path="res://assets/mat_green.tres" id="1_bgcxa"]
 [ext_resource type="PackedScene" uid="uid://c16bn1jtiqhig" path="res://prefabs/player.tscn" id="1_xijx7"]
 [ext_resource type="PackedScene" uid="uid://bjyarlckxl1wq" path="res://prefabs/structures/hut1.tscn" id="2_0afsd"]
+[ext_resource type="PackedScene" uid="uid://bo6c002tkqq2v" path="res://prefabs/entities/kestrel.tscn" id="4_i1yi8"]
 [ext_resource type="Script" uid="uid://ccyyya05un15d" path="res://scripts/ForestNetwork.cs" id="4_sek5r"]
 [ext_resource type="PackedScene" uid="uid://j836iymgxktk" path="res://prefabs/junction.tscn" id="4_yj5dr"]
 [ext_resource type="Script" uid="uid://30yifuwdlap4" path="res://scripts/GuidePath.cs" id="5_xr56k"]
@@ -122,6 +123,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251962, 0)
 
 [node name="Player" parent="Entities" instance=ExtResource("1_xijx7")]
 transform = Transform3D(0.0116934, 0, 0.999932, 0, 1, 0, -0.999932, 0, 0.0116934, 2.13564, 0.939108, -0.00838923)
+
+[node name="Kestrel" parent="Entities" node_paths=PackedStringArray("Junction1", "Junction2", "Junction3") instance=ExtResource("4_i1yi8")]
+Junction1 = NodePath("../../ForestNetwork/Junctions/Forest3")
+Junction2 = NodePath("../../ForestNetwork/Junctions/Forest6")
+Junction3 = NodePath("../../ForestNetwork/Junctions/Forest7")
 
 [node name="ForestNetwork" type="Node" parent="."]
 script = ExtResource("4_sek5r")

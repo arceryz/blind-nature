@@ -35,11 +35,16 @@ public partial class GuidePath : Path3D
 		Update();
 	}
 
+	public float GetLength()
+	{
+		return Curve.GetBakedLength();
+	}
+
 	void Update()
 	{
 		if (!IsNodeReady()) return;
-		if (Junction1 != null) Curve.SetPointPosition(0, ToLocal(Junction1.GlobalPosition)+Vector3.Up);
-		if (Junction2 != null) Curve.SetPointPosition(Curve.PointCount-1, ToLocal(Junction2.GlobalPosition)+Vector3.Up);
+		if (Junction1 != null) Curve.SetPointPosition(0, ToLocal(Junction1.GlobalPosition) + Vector3.Up);
+		if (Junction2 != null) Curve.SetPointPosition(Curve.PointCount - 1, ToLocal(Junction2.GlobalPosition) + Vector3.Up);
 		if (Junction1 != null && Junction2 != null)
 		{
 			Name = String.Format("{0} <> {1}", Junction1.Name, Junction2.Name);

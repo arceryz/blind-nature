@@ -22,6 +22,7 @@ Debug="*res://scripts/Debug.cs"
 [debug]
 
 flags/forest_network=true
+flags/kestrel=true
 
 [display]
 

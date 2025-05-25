@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo6c002tkqq2v"]
+
+[ext_resource type="Script" uid="uid://b23iymm3wa31v" path="res://scripts/Kestrel.cs" id="1_10gug"]
+
+[node name="Kestrel" type="Node3D"]
+script = ExtResource("1_10gug")

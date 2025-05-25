@@ -3,12 +3,19 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
+	public static Player Instance;
+
 	const float GRAVITY = 10.0f;
 	const float MOUSE_LOOK_H = 1.0f;
 	const float MOUSE_LOOK_V = 1.0f;
 	const float MOVE_SPEED = 4.0f;
 
 	Camera3D camera;
+
+	public override void _EnterTree()
+	{
+		Instance = this;
+	}
 
 	public override void _Ready()
 	{
