@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://j836iymgxktk"]
+[gd_scene load_steps=5 format=3 uid="uid://j836iymgxktk"]
 
 [ext_resource type="Material" uid="uid://cgd1avpf62oue" path="res://assets/mat_blue_alpha.tres" id="1_aqxqx"]
 [ext_resource type="Script" uid="uid://t868n2i4bthu" path="res://prefabs/Junction.cs" id="1_pqn43"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5ixv6"]
 
-[node name="Junction" type="Node3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pqn43"]
+height = 8.89111
+radius = 4.7207
+
+[node name="Junction" type="Area3D"]
+collision_layer = 0
 script = ExtResource("1_pqn43")
+metadata/_custom_type_script = "uid://t868n2i4bthu"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.492546, 0, 0, 0, 2.45737, 0, 0, 0, 0.492546, 0, 2.35759, 0)
@@ -19,4 +25,9 @@ billboard = 1
 text = "Junction"
 font_size = 567
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.44556, 0)
+shape = SubResource("CylinderShape3D_pqn43")
+
+[connection signal="body_entered" from="." to="." method="_OnAreaBodyEntered"]
 [connection signal="renamed" from="." to="." method="SetLabel"]

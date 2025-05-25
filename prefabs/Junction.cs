@@ -2,8 +2,12 @@ using Godot;
 using System;
 
 [Tool]
-public partial class Junction : Node3D
+[GlobalClass]
+public partial class Junction : Area3D
 {
+	[Signal]
+	public delegate void PlayerEnteredEventHandler();
+
 	Label3D label;
 
 	public override void _Ready()
@@ -17,5 +21,13 @@ public partial class Junction : Node3D
 		if (label == null)
 			return;
 		label.Text = Name;
+	}
+
+	void _OnAreaBodyEntered(Node3D body)
+	{
+		if (body is Player)
+		{
+			EmitSignal(SignalName.PlayerEntered);
+		}
 	}
 }

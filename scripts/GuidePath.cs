@@ -3,6 +3,7 @@ using System;
 using System.Dynamic;
 
 [Tool]
+[GlobalClass]
 public partial class GuidePath : Path3D
 {
 	[Export]

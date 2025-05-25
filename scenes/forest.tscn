@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://rop4mdjkcm0p"]
+[gd_scene load_steps=23 format=3 uid="uid://rop4mdjkcm0p"]
 
 [ext_resource type="Material" uid="uid://drxc4hg7i4uuw" path="res://assets/mat_green.tres" id="1_bgcxa"]
 [ext_resource type="PackedScene" uid="uid://c16bn1jtiqhig" path="res://prefabs/player.tscn" id="1_xijx7"]
 [ext_resource type="PackedScene" uid="uid://bjyarlckxl1wq" path="res://prefabs/structures/hut1.tscn" id="2_0afsd"]
+[ext_resource type="Script" uid="uid://ccyyya05un15d" path="res://scripts/ForestNetwork.cs" id="4_sek5r"]
 [ext_resource type="PackedScene" uid="uid://j836iymgxktk" path="res://prefabs/junction.tscn" id="4_yj5dr"]
 [ext_resource type="Script" uid="uid://30yifuwdlap4" path="res://scripts/GuidePath.cs" id="5_xr56k"]
 
@@ -91,10 +92,10 @@ point_count = 10
 
 [sub_resource type="Curve3D" id="Curve3D_cf55d"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -82.9391, 7.62939e-06, 18.2428, 0, 0, 0, 0, 0, 0, -74.465, 0, 20.3872, 0, 0, 0, 0, 0, 0, -65.4624, 0, 17.954, 0, 0, 0, 0, 0, 0, -58.6496, 0, 17.5891, 0, 0, 0, 0, 0, 0, -53.1751, 0, 20.5088, 0, 0, 0, 0, 0, 0, -46.6056, 0, 19.0489, 0, 0, 0, 0, 0, 0, -42.4174, 0, 21.7978),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -82.9391, 7.62939e-06, 18.2428, 0, 0, 0, 0, 0, 0, -75.2913, 0, 17.5465, 0, 0, 0, 0, 0, 0, -70.0677, 0, 20.6144, 0, 0, 0, 0, 0, 0, -65.4245, 0, 23.848, 0, 0, 0, 0, 0, 0, -59.3717, 0, 22.4385, 0, 0, 0, 0, 0, 0, -52.4069, 0, 19.7852, 0, 0, 0, 0, 0, 0, -46.6029, 0, 20.6973, 0, 0, 0, 0, 0, 0, -42.4174, 0, 21.7978),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 7
+point_count = 8
 
 [node name="Forest" type="Node"]
 
@@ -122,107 +123,122 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251962, 0)
 [node name="Player" parent="Entities" instance=ExtResource("1_xijx7")]
 transform = Transform3D(0.0116934, 0, 0.999932, 0, 1, 0, -0.999932, 0, 0.0116934, 2.13564, 0.939108, -0.00838923)
 
-[node name="Junctions" type="Node" parent="."]
+[node name="ForestNetwork" type="Node" parent="."]
+script = ExtResource("4_sek5r")
+metadata/_custom_type_script = "uid://ccyyya05un15d"
 
-[node name="Liora\'s Hut" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Junctions" type="Node" parent="ForestNetwork"]
+
+[node name="Liora\'s Hut" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8792, 0, -0.103804)
 
-[node name="Forest1" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Forest1" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.4174, 0, 21.7978)
 
-[node name="Forest2" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Forest2" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3847, -7.62939e-06, 56.0027)
 
-[node name="Forest3" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Forest3" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.5363, 0, 66.7551)
 
-[node name="Forest4" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Forest4" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.9391, 7.62939e-06, 18.2428)
 
-[node name="Forest5" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Forest5" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.0168, 7.62939e-06, -29.781)
 
-[node name="Forest7" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Forest7" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5721, 7.62939e-06, -44.1349)
 
-[node name="Forest6" parent="Junctions" instance=ExtResource("4_yj5dr")]
+[node name="Forest6" parent="ForestNetwork/Junctions" instance=ExtResource("4_yj5dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.792, -4.54747e-12, -27.2845)
 
-[node name="Paths" type="Node" parent="."]
+[node name="Paths" type="Node" parent="ForestNetwork"]
 
-[node name="Liora\'s Hut <> Forest1" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Liora\'s Hut <> Forest1" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_bgcxa")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Liora\'s Hut")
 Junction2 = NodePath("../../Junctions/Forest1")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest1 <> Forest2" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest1 <> Forest2" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_xr56k")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest1")
 Junction2 = NodePath("../../Junctions/Forest2")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest2 <> Forest3" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest2 <> Forest3" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_sek5r")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest2")
 Junction2 = NodePath("../../Junctions/Forest3")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest1 <> Forest3" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest1 <> Forest3" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_i1yi8")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest1")
 Junction2 = NodePath("../../Junctions/Forest3")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest3 <> Forest4" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest3 <> Forest4" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_qm7rg")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest3")
 Junction2 = NodePath("../../Junctions/Forest4")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest4 <> Forest6" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest4 <> Forest6" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_0nboi")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest4")
 Junction2 = NodePath("../../Junctions/Forest6")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest6 <> Forest5" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest6 <> Forest5" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_3knxq")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest6")
 Junction2 = NodePath("../../Junctions/Forest5")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest4 <> Forest5" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest4 <> Forest5" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_ercsu")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest4")
 Junction2 = NodePath("../../Junctions/Forest5")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest7 <> Forest5" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest7 <> Forest5" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_j3csf")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest7")
 Junction2 = NodePath("../../Junctions/Forest5")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest7 <> Liora\'s Hut" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest7 <> Liora\'s Hut" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_dabdc")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest7")
 Junction2 = NodePath("../../Junctions/Liora\'s Hut")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
 
-[node name="Forest4 <> Forest1" type="Path3D" parent="Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
+[node name="Forest4 <> Forest1" type="Path3D" parent="ForestNetwork/Paths" node_paths=PackedStringArray("Junction1", "Junction2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("Curve3D_cf55d")
 script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest4")
 Junction2 = NodePath("../../Junctions/Forest1")
+metadata/_custom_type_script = "uid://30yifuwdlap4"
