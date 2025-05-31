@@ -5,19 +5,14 @@ using System.Linq;
 
 public partial class NavDebugAgent : Node3D
 {
+	public static NavDebugAgent Instance;
+
 	[Export]
 	Array<Rid> Maps;
 
 	[Export]
 	int MapIndex = 0;
-
-	enum State
-	{
-		Idle,
-		Navigating
-	}
-	State state = State.Idle;
-
+	
 	ForestRoute Route;
 	MeshInstance3D RouteMesh = new();
 	Label3D Label;
@@ -25,6 +20,12 @@ public partial class NavDebugAgent : Node3D
 
 	Node3D StartPoint;
 	Node3D EndPoint;
+	Node3D PathPoint;
+
+	public override void _EnterTree()
+	{
+		Instance = this;
+	}
 
 	public override void _Ready()
 	{
@@ -37,24 +38,20 @@ public partial class NavDebugAgent : Node3D
 
 		StartPoint = GetNode<Node3D>("StartPoint");
 		EndPoint = GetNode<Node3D>("EndPoint");
-
-		CallDeferred(MethodName._OnNavigationReady);
-	}
-
-	void _OnNavigationReady()
-	{
-		Maps = NavigationServer3D.GetMaps();
+		PathPoint = GetNode<Node3D>("PathPoint");
 	}
 
 	public override void _Process(double delta)
 	{
-		switch (state)
+		if (Input.IsActionPressed("nav_debug_set_end"))
 		{
-			case State.Idle:
-				break;
+			EndPoint.GlobalPosition = GetCameraRayPosition();
+		}
 
-			case State.Navigating:
-				break;
+		if (Input.IsActionPressed("nav_debug_set_start"))
+		{
+			StartPoint.GlobalPosition = GetCameraRayPosition();
+			UpdateDebugLabel();
 		}
 	}
 
@@ -93,29 +90,37 @@ public partial class NavDebugAgent : Node3D
 			Route = ForestNetwork.Instance.GetClosestJunctionRoute(StartPoint.GlobalPosition, EndPoint.GlobalPosition);
 			UpdateRouteMesh();
 		}
-
-		if (ev.IsActionPressed("nav_debug_set_end"))
-		{
-			EndPoint.GlobalPosition = GetCameraRayPosition();
-		}
-
-		if (ev.IsActionPressed("nav_debug_set_start"))
-		{
-			StartPoint.GlobalPosition = GetCameraRayPosition();
-			UpdateDebugLabel();
-		}
 	}
 
 	public void UpdateDebugLabel()
 	{
 		(float pathDist, GuidePath path) = ForestNetwork.Instance.GetClosestPath(StartPoint.GlobalPosition);
 		(float junctionDist, Junction junc) = ForestNetwork.Instance.GetClosestJunction(StartPoint.GlobalPosition);
+		float totalOffset = 0.0f;
+		Vector3 offsetPoint = Vector3.Zero;
+		if (Route != null)
+		{
+			totalOffset = Route.GetClosestOffset(StartPoint.GlobalPosition);
+			offsetPoint = Route.Sample(totalOffset);
+		}
 
 		string text = "";
 		text += String.Format("dist={0:0.00}, path={1}\n", pathDist, path.Name);
 		text += String.Format("dist={0:0.00}, junction={1}\n", junctionDist, junc.Name);
+		text += String.Format("totalOffset={0:0.00}\n", totalOffset);
+		text += String.Format("stray={0:0.00}\n", (StartPoint.GlobalPosition-offsetPoint).Length());
 
+		PathPoint.GlobalPosition = offsetPoint;
 		DebugLabel.Text = text;
+	}
+
+	public void SetRoute(ForestRoute route)
+	{
+		StartPoint.GlobalPosition = route.Junctions[0].GlobalPosition;
+		EndPoint.GlobalPosition = route.Junctions.Last().GlobalPosition;
+		Route = route;
+		UpdateRouteMesh();
+		UpdateDebugLabel();
 	}
 
 	public void UpdateRouteMesh()

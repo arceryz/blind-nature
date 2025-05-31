@@ -34,6 +34,65 @@ public class ForestRoute
 		return positions;
 	}
 
+	public float GetClosestOffset(Vector3 from)
+	{
+		// Find the closest path in the route.
+		int closestIndex = 0;
+		float closestDist = -1;
+		GuidePath closestPath = null;
+
+		for (int i = 0; i < Junctions.Length - 1; i++)
+		{
+			GuidePath path = ForestNetwork.Instance.GetGuidePath(Junctions[i], Junctions[i + 1]);
+			float dist = path.GetDistance(from);
+
+			if (dist < closestDist || closestDist < 0)
+			{
+				closestIndex = i;
+				closestDist = dist;
+				closestPath = path;
+			}
+		}
+
+		Junction j2 = Junctions[closestIndex + 1];
+		(_, float pathOffset) = closestPath.GetClosestPoint(from);
+		float totalOffset = (j2 == closestPath.Junction2) ? pathOffset : (closestPath.GetLength() - pathOffset);
+
+		// Sum the lengths up until this point.
+		for (int i = 0; i < closestIndex; i++)
+		{
+			GuidePath path = ForestNetwork.Instance.GetGuidePath(Junctions[i], Junctions[i + 1]);
+			totalOffset += path.GetLength();
+		}
+
+		return totalOffset;
+	}
+
+	public Vector3 Sample(float offset)
+	{
+		GuidePath path = null;
+		int lastIndex = 0;
+		for (int i = 0; i < Junctions.Length - 1; i++)
+		{
+			path = ForestNetwork.Instance.GetGuidePath(Junctions[i], Junctions[i + 1]);
+			float length = path.GetLength();
+			lastIndex = i;
+			if (offset < length)
+			{
+				break;
+			}
+			offset -= length;
+		}
+
+		Junction j2 = Junctions[lastIndex + 1];
+		if (j2 == path.Junction1)
+		{
+			offset = path.GetLength() - offset;
+		}
+
+		return path.Sample(offset);
+	}
+
 	public override string ToString()
 	{
 		string s = String.Format("Route has {0} junctions\n", Junctions.Length);
@@ -169,11 +228,6 @@ public partial class ForestNetwork : Node
 		}
 
 		return (distance, closest);
-	}
-
-	public ForestRoute GetWorldRoute(Vector3 from, Vector3 to)
-	{
-		return new ForestRoute([]);
 	}
 
 	public ForestRoute GetClosestJunctionRoute(Vector3 from, Vector3 to)

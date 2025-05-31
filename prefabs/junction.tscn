@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://j836iymgxktk"]
 
-[ext_resource type="Material" uid="uid://cgd1avpf62oue" path="res://assets/mat_blue_alpha.tres" id="1_aqxqx"]
+[ext_resource type="Material" uid="uid://cgd1avpf62oue" path="res://assets/materials/mat_blue_alpha.tres" id="1_aqxqx"]
 [ext_resource type="Script" uid="uid://cjcitllw7b8gw" path="res://scripts/Junction.cs" id="1_pqn43"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5ixv6"]

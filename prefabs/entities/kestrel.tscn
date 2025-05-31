@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo6c002tkqq2v"]
+[gd_scene load_steps=5 format=3 uid="uid://bo6c002tkqq2v"]
 
 [ext_resource type="Script" uid="uid://b23iymm3wa31v" path="res://scripts/Kestrel.cs" id="1_10gug"]
+[ext_resource type="Material" uid="uid://dt5d8n4coike3" path="res://assets/materials/mat_red.tres" id="2_kfsae"]
+[ext_resource type="AudioStream" uid="uid://ba5qa5h3r2jf6" path="res://sounds/kestrel_guide_call.wav" id="3_envoc"]
 
-[node name="Kestrel" type="Node3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_envoc"]
+material = ExtResource("2_kfsae")
+
+[node name="Kestrel" type="Node3D" node_paths=PackedStringArray("CallingSFX")]
 script = ExtResource("1_10gug")
+CallingSFX = NodePath("GuideCall")
+CallingIntervalRandom = 0.3
+CallingDistanceMin = 7.0
+CallingDistanceMax = 20.0
+RelocateDistanceForward = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887222, 0)
+mesh = SubResource("SphereMesh_envoc")
+
+[node name="StateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.22191, 0)
+billboard = 1
+text = "State"
+font_size = 327
+
+[node name="GuideCall" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_envoc")

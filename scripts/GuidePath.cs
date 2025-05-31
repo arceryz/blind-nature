@@ -51,6 +51,11 @@ public partial class GuidePath : Path3D
 		return (point, offset);
 	}
 
+	public Vector3 Sample(float offset)
+	{
+		return Curve.SampleBaked(offset, true);
+	}
+
 	void Update()
 	{
 		if (!IsNodeReady()) return;

@@ -1,9 +1,13 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public partial class Player : CharacterBody3D
 {
 	public static Player Instance;
+
+	[Export] Array<Node3D> ArcheryLocations;
+	int CurrentLocation = 0;
 
 	const float GRAVITY = 10.0f;
 	const float MOUSE_LOOK_H = 1.0f;
@@ -21,6 +25,16 @@ public partial class Player : CharacterBody3D
 	{
 		camera = GetNode<Camera3D>("Camera");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		if (!ForestNetwork.Instance.IsNodeReady())
+		{
+			ForestNetwork.Instance.Ready += _NetworkReady;
+		}
+	}
+
+	public void _NetworkReady()
+	{
+		Kestrel.Instance.NavigateTo(ArcheryLocations[0].GlobalPosition);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -49,6 +63,12 @@ public partial class Player : CharacterBody3D
 			else
 				camera.MakeCurrent();
 		}
+
+		if (e.IsActionPressed("ui_accept"))
+		{
+			CurrentLocation = Math.Min(CurrentLocation + 1, ArcheryLocations.Count - 1);
+			Kestrel.Instance.NavigateTo(ArcheryLocations[CurrentLocation].GlobalPosition);
+		}
 	}
 
 	void ProcessMovement(float delta)
@@ -56,7 +76,8 @@ public partial class Player : CharacterBody3D
 		// Regular movement.
 		Vector2 input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-		Vector3 worldMovement = camera.GlobalBasis * new Vector3(input.X, 0, input.Y);
+		Camera3D activeCamera = GetViewport().GetCamera3D();
+		Vector3 worldMovement = activeCamera.GlobalBasis * new Vector3(input.X, 0, input.Y);
 		worldMovement.Y = 0;
 		worldMovement = worldMovement.Normalized() * MOVE_SPEED;
 
