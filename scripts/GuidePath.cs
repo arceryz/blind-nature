@@ -6,8 +6,7 @@ using System.Dynamic;
 [GlobalClass]
 public partial class GuidePath : Path3D
 {
-	[Export]
-	public Node3D Junction1
+	[Export]	public Junction Junction1
 	{
 		get { return _Junction1; }
 		set
@@ -16,10 +15,10 @@ public partial class GuidePath : Path3D
 			Update();
 		}
 	}
-	Node3D _Junction1;
+	Junction _Junction1;
 
 	[Export]
-	public Node3D Junction2
+	public Junction Junction2
 	{
 		get { return _Junction2; }
 		set
@@ -28,7 +27,7 @@ public partial class GuidePath : Path3D
 			Update();
 		}
 	}
-	Node3D _Junction2;
+	Junction _Junction2;
 
 	public override void _Ready()
 	{
@@ -38,6 +37,18 @@ public partial class GuidePath : Path3D
 	public float GetLength()
 	{
 		return Curve.GetBakedLength();
+	}
+
+	public float GetDistance(Vector3 from)
+	{
+		return Curve.GetClosestPoint(GlobalPosition + from).DistanceTo(from);
+	}
+
+	public (Vector3, float) GetClosestPoint(Vector3 from)
+	{
+		float offset = Curve.GetClosestOffset(from + GlobalPosition);
+		Vector3 point = Curve.SampleBaked(offset);
+		return (point, offset);
 	}
 
 	void Update()

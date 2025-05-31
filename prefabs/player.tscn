@@ -1,16 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c16bn1jtiqhig"]
+[gd_scene load_steps=5 format=3 uid="uid://c16bn1jtiqhig"]
 
 [ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://scripts/Player.cs" id="1_72ieh"]
-[ext_resource type="Shader" uid="uid://csuc5rahwtw5" path="res://assets/color_fill.gdshader" id="2_4dohe"]
+[ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://assets/mat_blue.tres" id="2_4dohe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_72ieh"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r66lb"]
-render_priority = 0
-shader = ExtResource("2_4dohe")
-shader_parameter/color = Color(0, 0.275, 0.75, 1)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_72ieh")
@@ -24,4 +19,4 @@ current = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_72ieh")
-surface_material_override/0 = SubResource("ShaderMaterial_r66lb")
+surface_material_override/0 = ExtResource("2_4dohe")

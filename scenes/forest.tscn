@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://rop4mdjkcm0p"]
+[gd_scene load_steps=25 format=3 uid="uid://rop4mdjkcm0p"]
 
 [ext_resource type="Material" uid="uid://drxc4hg7i4uuw" path="res://assets/mat_green.tres" id="1_bgcxa"]
 [ext_resource type="PackedScene" uid="uid://c16bn1jtiqhig" path="res://prefabs/player.tscn" id="1_xijx7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ccyyya05un15d" path="res://scripts/ForestNetwork.cs" id="4_sek5r"]
 [ext_resource type="PackedScene" uid="uid://j836iymgxktk" path="res://prefabs/junction.tscn" id="4_yj5dr"]
 [ext_resource type="Script" uid="uid://30yifuwdlap4" path="res://scripts/GuidePath.cs" id="5_xr56k"]
+[ext_resource type="PackedScene" uid="uid://dpfej0lclpc6g" path="res://prefabs/entities/nav_debug_agent.tscn" id="8_qm7rg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xijx7"]
 
@@ -105,7 +106,7 @@ environment = SubResource("Environment_bgcxa")
 
 [node name="Obstacles" type="Node" parent="."]
 
-[node name="WorldFloor" type="StaticBody3D" parent="Obstacles"]
+[node name="WorldFloor" type="StaticBody3D" parent="Obstacles" groups=["world_nav"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/WorldFloor"]
 transform = Transform3D(25.5957, 0, 0, 0, 25.5957, 0, 0, 0, 25.5957, 0, -0.0709648, 0)
@@ -116,7 +117,7 @@ transform = Transform3D(454.588, 0, 0, 0, 0.999999, 0, 0, 0, 476.993, 0, 0, 0)
 material_override = ExtResource("1_bgcxa")
 mesh = SubResource("PlaneMesh_0afsd")
 
-[node name="Hut" parent="Obstacles" instance=ExtResource("2_0afsd")]
+[node name="Hut" parent="Obstacles" groups=["world_nav"] instance=ExtResource("2_0afsd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251962, 0)
 
 [node name="Entities" type="Node" parent="."]
@@ -124,10 +125,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251962, 0)
 [node name="Player" parent="Entities" instance=ExtResource("1_xijx7")]
 transform = Transform3D(0.0116934, 0, 0.999932, 0, 1, 0, -0.999932, 0, 0.0116934, 2.13564, 0.939108, -0.00838923)
 
-[node name="Kestrel" parent="Entities" node_paths=PackedStringArray("Junction1", "Junction2", "Junction3") instance=ExtResource("4_i1yi8")]
-Junction1 = NodePath("../../ForestNetwork/Junctions/Forest3")
-Junction2 = NodePath("../../ForestNetwork/Junctions/Forest6")
-Junction3 = NodePath("../../ForestNetwork/Junctions/Forest7")
+[node name="Kestrel" parent="Entities" instance=ExtResource("4_i1yi8")]
 
 [node name="ForestNetwork" type="Node" parent="."]
 script = ExtResource("4_sek5r")
@@ -248,3 +246,14 @@ script = ExtResource("5_xr56k")
 Junction1 = NodePath("../../Junctions/Forest4")
 Junction2 = NodePath("../../Junctions/Forest1")
 metadata/_custom_type_script = "uid://30yifuwdlap4"
+
+[node name="Debug" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Debug"]
+transform = Transform3D(0.573577, -0.59222, 0.565938, 0, 0.690883, 0.722967, -0.819152, -0.414677, 0.396274, 0.762, 71.102, 35.641)
+projection = 1
+current = true
+size = 100.0
+
+[node name="NavDebugAgent" parent="Debug" instance=ExtResource("8_qm7rg")]
+Maps = null
