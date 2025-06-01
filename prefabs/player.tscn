@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c16bn1jtiqhig"]
+[gd_scene load_steps=6 format=3 uid="uid://c16bn1jtiqhig"]
 
 [ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://scripts/Player.cs" id="1_72ieh"]
 [ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://assets/materials/mat_blue.tres" id="2_4dohe"]
+[ext_resource type="AudioStream" uid="uid://c7xoh603mvc1s" path="res://sounds/liora_step_dirt.wav" id="3_r66lb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_72ieh"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("ArcheryLocations")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("StepSFX", "ArcheryLocations")]
 collision_layer = 2
 script = ExtResource("1_72ieh")
+StepSFX = NodePath("StepSFX")
+StepSize = 3.0
 ArcheryLocations = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -26,3 +29,6 @@ current = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_72ieh")
 surface_material_override/0 = ExtResource("2_4dohe")
+
+[node name="StepSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_r66lb")

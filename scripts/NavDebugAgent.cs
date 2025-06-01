@@ -43,6 +43,7 @@ public partial class NavDebugAgent : Node3D
 
 	public override void _Process(double delta)
 	{
+		UpdateDebugLabel();
 		if (Input.IsActionPressed("nav_debug_set_end"))
 		{
 			EndPoint.GlobalPosition = GetCameraRayPosition();
@@ -109,6 +110,7 @@ public partial class NavDebugAgent : Node3D
 		text += String.Format("dist={0:0.00}, junction={1}\n", junctionDist, junc.Name);
 		text += String.Format("totalOffset={0:0.00}\n", totalOffset);
 		text += String.Format("stray={0:0.00}\n", (StartPoint.GlobalPosition-offsetPoint).Length());
+		text += String.Format("stepAccum={0:0.0}\n", Player.Instance.StepAccumulator);
 
 		PathPoint.GlobalPosition = offsetPoint;
 		DebugLabel.Text = text;

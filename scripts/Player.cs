@@ -6,6 +6,13 @@ public partial class Player : CharacterBody3D
 {
 	public static Player Instance;
 
+	[ExportGroup("SFX")]
+	[Export] AudioStreamPlayer3D StepSFX;
+	[Export] float StepSize = 0.5f;
+	[Export] float StepFalloffTime = 1.0f;
+	public float StepAccumulator = 0.0f;
+
+	[ExportGroup("Properties")]
 	[Export] Array<Node3D> ArcheryLocations;
 	int CurrentLocation = 0;
 
@@ -79,20 +86,40 @@ public partial class Player : CharacterBody3D
 		Vector3 worldMovement = camera.GlobalBasis * new Vector3(input.X, 0, input.Y);
 		worldMovement.Y = 0;
 		worldMovement = worldMovement.Normalized() * MOVE_SPEED;
+		if (Input.IsActionPressed("debug_sprint"))
+		{
+			worldMovement *= 5.0f;
+		}
 
 		Vector3 velocity = Velocity;
 		velocity.X = worldMovement.X;
 		velocity.Z = worldMovement.Z;
 
-		// Gravity.
-		if (!IsOnFloor())
+		if (input.IsZeroApprox())
 		{
-			velocity.Y -= GRAVITY * delta;
+			StepAccumulator -= StepFalloffTime * StepSize * delta;
+			StepAccumulator = Mathf.Max(StepAccumulator, 0.0f);
 		}
 		else
 		{
-			velocity.Y = 0;
+			StepAccumulator += worldMovement.Length() * delta;
 		}
+
+		if (StepAccumulator > StepSize)
+		{
+			StepSFX.Play();
+			StepAccumulator = 0.0f;
+		}
+
+		// Gravity.
+			if (!IsOnFloor())
+			{
+				velocity.Y -= GRAVITY * delta;
+			}
+			else
+			{
+				velocity.Y = 0;
+			}
 
 		Velocity = velocity;
 		MoveAndSlide();

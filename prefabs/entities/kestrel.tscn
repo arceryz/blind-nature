@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo6c002tkqq2v"]
+[gd_scene load_steps=6 format=3 uid="uid://bo6c002tkqq2v"]
 
 [ext_resource type="Script" uid="uid://b23iymm3wa31v" path="res://scripts/Kestrel.cs" id="1_10gug"]
 [ext_resource type="Material" uid="uid://dt5d8n4coike3" path="res://assets/materials/mat_red.tres" id="2_kfsae"]
 [ext_resource type="AudioStream" uid="uid://ba5qa5h3r2jf6" path="res://sounds/kestrel_guide_call.wav" id="3_envoc"]
+[ext_resource type="AudioStream" uid="uid://ededno6vfxa0" path="res://sounds/kestrel_flapping.wav" id="4_e2ku0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_envoc"]
 material = ExtResource("2_kfsae")
 
-[node name="Kestrel" type="Node3D" node_paths=PackedStringArray("CallingSFX")]
+[node name="Kestrel" type="Node3D" node_paths=PackedStringArray("CallingSFX", "FlappingSFX")]
 script = ExtResource("1_10gug")
-CallingSFX = NodePath("GuideCall")
+CallingSFX = NodePath("CallingSFX")
+FlappingSFX = NodePath("FlappingSFX")
 CallingIntervalRandom = 0.3
 CallingDistanceMin = 7.0
 CallingDistanceMax = 20.0
@@ -26,5 +28,10 @@ billboard = 1
 text = "State"
 font_size = 327
 
-[node name="GuideCall" type="AudioStreamPlayer3D" parent="."]
+[node name="CallingSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_envoc")
+
+[node name="FlappingSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_e2ku0")
+volume_db = 10.0
+pitch_scale = 4.0

@@ -8,8 +8,11 @@ public partial class Kestrel : Node3D
 {
 	public static Kestrel Instance;
 
-	[ExportGroup("Navigation")]
+	[ExportGroup("SFX")]
 	[Export] AudioStreamPlayer3D CallingSFX;
+	[Export] AudioStreamPlayer3D FlappingSFX;
+
+	[ExportGroup("Navigation")]
 	[Export] float CallingInterval = 1.0f;
 	[Export] float CallingIntervalRandom = 1.0f;
 	[Export] float CallingDistanceMin = 5.0f;
@@ -101,6 +104,17 @@ public partial class Kestrel : Node3D
 		}
 	}
 
+	void _OnRelocatingEnd()
+	{
+		CurrentState = State.Calling;
+		FlappingSFX.Stop();
+	}
+
+	void _OnRelocatingStart()
+	{
+		FlappingSFX.Play();
+	}
+
 	public void RelocateToGuidingPosition()
 	{
 		float reloc = PlayerDistance < CallingDistanceMin ? RelocateDistanceForward : RelocateDistanceBackward;
@@ -118,10 +132,11 @@ public partial class Kestrel : Node3D
 		CurrentState = State.Relocating;
 		CurrentOffset = newOffset;
 
+		_OnRelocatingStart();
 		Tween tw = CreateTween();
 		tw.TweenProperty(this, "global_position", (GlobalPosition + newPosition) * 0.5f + Vector3.Up * RelocateHeight, RelocateSpeed / 2.0);
 		tw.TweenProperty(this, "global_position", newPosition, RelocateSpeed / 2.0f);
-		tw.TweenProperty(this, "CurrentState", (int)State.Calling, 0.0f);
+		tw.TweenCallback(Callable.From(_OnRelocatingEnd));
 	}
 
 	public void RecalculateRoute()
