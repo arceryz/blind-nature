@@ -21,6 +21,7 @@ collision_layer = 2
 script = ExtResource("1_72ieh")
 StepSFX = NodePath("StepSFX_Layers")
 StepSize = 3.0
+controller_turn_speed = 3.0
 ArcheryLocations = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

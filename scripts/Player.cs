@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Godot.Collections;
+using System.Runtime.CompilerServices;
 
 public partial class Player : CharacterBody3D
 {
@@ -13,16 +14,16 @@ public partial class Player : CharacterBody3D
 	public float StepAccumulator = 0.0f;
 	
 
-	[ExportGroup("Properties")]
+	[ExportGroup("Movement")]
+	[Export] float mouse_look_h = 1.0f;
+	[Export] float mouse_look_v = 1.0f;
+	[Export] float move_speed = 4.0f;
+	[Export] float controller_turn_speed = 1.0f;
+
 	[Export] Array<Node3D> ArcheryLocations;
+	Camera3D camera;
 	int CurrentLocation = 0;
 
-	const float GRAVITY = 10.0f;
-	const float MOUSE_LOOK_H = 1.0f;
-	const float MOUSE_LOOK_V = 1.0f;
-	const float MOVE_SPEED = 4.0f;
-
-	Camera3D camera;
 
 	public override void _EnterTree()
 	{
@@ -58,10 +59,10 @@ public partial class Player : CharacterBody3D
 		}
 		if (e is InputEventMouseMotion motion && Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
-			Rotation = Rotation with { Y = Rotation.Y - motion.Relative.X * MOUSE_LOOK_V / 360.0f };
+			Rotation = Rotation with { Y = Rotation.Y - motion.Relative.X * mouse_look_v / 360.0f };
 			camera.Rotation = camera.Rotation with
 			{
-				X = Mathf.Clamp(camera.Rotation.X - motion.Relative.Y * MOUSE_LOOK_H / 640.0f, -Mathf.Pi/2, Mathf.Pi/2)
+				X = Mathf.Clamp(camera.Rotation.X - motion.Relative.Y * mouse_look_h / 640.0f, -Mathf.Pi/2, Mathf.Pi/2)
 			};
 		}
 		if (e.IsActionPressed("blind_mode"))
@@ -87,9 +88,13 @@ public partial class Player : CharacterBody3D
 		Vector3 direction = camera.GlobalBasis * new Vector3(input.X, 0, input.Y);
 		direction.Y = 0;
 		direction = direction.Normalized();
+
+		// Rotation with controller.
+		float axis = Input.GetAxis("turn_left", "turn_right");
+		Rotation = Rotation with { Y = Rotation.Y - axis * controller_turn_speed * delta };
 		
 		// Set velocity vector.
-		float speed = MOVE_SPEED * (Input.IsActionPressed("debug_sprint") ? 5.0f: 1.0f);
+		float speed = move_speed * (Input.IsActionPressed("debug_sprint") ? 5.0f: 1.0f);
 		Vector3 velocity = Velocity;
 		velocity.X = direction.X * speed;
 		velocity.Z = direction.Z * speed;
@@ -114,7 +119,7 @@ public partial class Player : CharacterBody3D
 		// Gravity.
 			if (!IsOnFloor())
 			{
-				velocity.Y -= GRAVITY * delta;
+				velocity.Y -= 10.0f * delta;
 			}
 			else
 			{
