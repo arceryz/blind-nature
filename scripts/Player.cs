@@ -11,6 +11,7 @@ public partial class Player : CharacterBody3D
 	[Export] float StepSize = 0.5f;
 	[Export] float StepFalloffTime = 1.0f;
 	public float StepAccumulator = 0.0f;
+	
 
 	[ExportGroup("Properties")]
 	[Export] Array<Node3D> ArcheryLocations;

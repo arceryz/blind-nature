@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6n4xae2s6pre"
+path="res://.godot/imported/Kestrel flapping-002.wav-3375e961142d17ca5cc6fe0376b5b92c.sample"
+
+[deps]
+
+source_file="res://sounds/Kestrel/Kestrel Flapping/Kestrel flapping-002.wav"
+dest_files=["res://.godot/imported/Kestrel flapping-002.wav-3375e961142d17ca5cc6fe0376b5b92c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

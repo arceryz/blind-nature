@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ciyoxn0srti2w"
+path="res://.godot/imported/BF_Kestrel_Calling_Cue-002.wav-6719e8a02e8e7bc5be2bba73bc3f0a51.sample"
+
+[deps]
+
+source_file="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-002.wav"
+dest_files=["res://.godot/imported/BF_Kestrel_Calling_Cue-002.wav-6719e8a02e8e7bc5be2bba73bc3f0a51.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
