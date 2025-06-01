@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c7xoh603mvc1s"
-path="res://.godot/imported/liora_step_dirt.wav-35d49e7c44a2f9f75d29aac22befb836.sample"
+path="res://.godot/imported/liora_step_dirt.wav-7da80d6ea76413e9778a4bfa2c3c1cb6.sample"
 
 [deps]
 
-source_file="res://sounds/liora_step_dirt.wav"
-dest_files=["res://.godot/imported/liora_step_dirt.wav-35d49e7c44a2f9f75d29aac22befb836.sample"]
+source_file="res://sounds/Placeholder/liora_step_dirt.wav"
+dest_files=["res://.godot/imported/liora_step_dirt.wav-7da80d6ea76413e9778a4bfa2c3c1cb6.sample"]
 
 [params]
 

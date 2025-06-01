@@ -1,0 +1,19 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://dxxvytbv1iv4b"]
+
+[ext_resource type="AudioStream" uid="uid://q25j1kl7v5op" path="res://sounds/Footsteps/Surfaces/BF_Player_Footsteps_Boot_Run_Forest_Dirt-001.wav" id="1_kjctd"]
+[ext_resource type="AudioStream" uid="uid://bpucvv6avc6jt" path="res://sounds/Footsteps/Surfaces/BF_Player_Footsteps_Boot_Run_Forest_Dirt-002.wav" id="2_tiv5w"]
+[ext_resource type="AudioStream" uid="uid://d36mk8vlnownn" path="res://sounds/Footsteps/Surfaces/BF_Player_Footsteps_Boot_Run_Forest_Dirt-003.wav" id="3_3wcwk"]
+[ext_resource type="AudioStream" uid="uid://h6bylp8d0lqv" path="res://sounds/Footsteps/Surfaces/BF_Player_Footsteps_Boot_Run_Forest_Dirt-004.wav" id="4_tv00u"]
+[ext_resource type="AudioStream" uid="uid://b13w83etcwj4k" path="res://sounds/Footsteps/Surfaces/BF_Player_Footsteps_Boot_Run_Forest_Dirt-005.wav" id="5_elwu2"]
+[ext_resource type="AudioStream" uid="uid://dwf66pmp1geov" path="res://sounds/Footsteps/Surfaces/BF_Player_Footsteps_Boot_Run_Forest_Dirt-006.wav" id="6_1724y"]
+
+[resource]
+random_pitch = 1.2
+random_volume_offset_db = 3.0
+streams_count = 6
+stream_0/stream = ExtResource("1_kjctd")
+stream_1/stream = ExtResource("2_tiv5w")
+stream_2/stream = ExtResource("3_3wcwk")
+stream_3/stream = ExtResource("4_tv00u")
+stream_4/stream = ExtResource("5_elwu2")
+stream_5/stream = ExtResource("6_1724y")

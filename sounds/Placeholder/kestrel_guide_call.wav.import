@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ba5qa5h3r2jf6"
-path="res://.godot/imported/kestrel_guide_call.wav-c509de0b18a486bd67fda523699cdc33.sample"
+path="res://.godot/imported/kestrel_guide_call.wav-c5e4fdc7c80b9ba9f7abeece2092487c.sample"
 
 [deps]
 
-source_file="res://sounds/kestrel_guide_call.wav"
-dest_files=["res://.godot/imported/kestrel_guide_call.wav-c509de0b18a486bd67fda523699cdc33.sample"]
+source_file="res://sounds/Placeholder/kestrel_guide_call.wav"
+dest_files=["res://.godot/imported/kestrel_guide_call.wav-c5e4fdc7c80b9ba9f7abeece2092487c.sample"]
 
 [params]
 

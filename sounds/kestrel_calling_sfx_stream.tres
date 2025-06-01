@@ -1,0 +1,21 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=8 format=3 uid="uid://d3gym53y8qs6u"]
+
+[ext_resource type="AudioStream" uid="uid://1dprno35o6mj" path="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-001.wav" id="1_ypwgc"]
+[ext_resource type="AudioStream" uid="uid://ciyoxn0srti2w" path="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-002.wav" id="2_mo162"]
+[ext_resource type="AudioStream" uid="uid://cuc45ym1ps7im" path="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-003.wav" id="3_oxufw"]
+[ext_resource type="AudioStream" uid="uid://bghfapdqbfjyv" path="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-004.wav" id="4_ttecb"]
+[ext_resource type="AudioStream" uid="uid://bwmhlu02q1eah" path="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-005.wav" id="5_4wf7m"]
+[ext_resource type="AudioStream" uid="uid://c57ynwfs1jm3x" path="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-006.wav" id="6_f6oe8"]
+[ext_resource type="AudioStream" uid="uid://botnl4q6li6h5" path="res://sounds/Kestrel/Kestrel Calling Cue/BF_Kestrel_Calling_Cue-007.wav" id="7_tp31b"]
+
+[resource]
+random_pitch = 1.2
+random_volume_offset_db = 3.0
+streams_count = 7
+stream_0/stream = ExtResource("1_ypwgc")
+stream_1/stream = ExtResource("2_mo162")
+stream_2/stream = ExtResource("3_oxufw")
+stream_3/stream = ExtResource("4_ttecb")
+stream_4/stream = ExtResource("5_4wf7m")
+stream_5/stream = ExtResource("6_f6oe8")
+stream_6/stream = ExtResource("7_tp31b")

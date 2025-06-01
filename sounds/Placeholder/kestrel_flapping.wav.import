@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ededno6vfxa0"
-path="res://.godot/imported/kestrel_flapping.wav-ae60751e4cc0098efd218194bd746b20.sample"
+path="res://.godot/imported/kestrel_flapping.wav-f9b4350d77b4ab8ed4e876dc9c8a5a39.sample"
 
 [deps]
 
-source_file="res://sounds/kestrel_flapping.wav"
-dest_files=["res://.godot/imported/kestrel_flapping.wav-ae60751e4cc0098efd218194bd746b20.sample"]
+source_file="res://sounds/Placeholder/kestrel_flapping.wav"
+dest_files=["res://.godot/imported/kestrel_flapping.wav-f9b4350d77b4ab8ed4e876dc9c8a5a39.sample"]
 
 [params]
 
