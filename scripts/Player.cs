@@ -66,7 +66,7 @@ public partial class Player : CharacterBody3D
 
 		if (e.IsActionPressed("ui_accept"))
 		{
-			CurrentLocation = Math.Min(CurrentLocation + 1, ArcheryLocations.Count - 1);
+			CurrentLocation = (CurrentLocation + 1) % ArcheryLocations.Count;
 			Kestrel.Instance.NavigateTo(ArcheryLocations[CurrentLocation].GlobalPosition);
 		}
 	}
@@ -76,8 +76,7 @@ public partial class Player : CharacterBody3D
 		// Regular movement.
 		Vector2 input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-		Camera3D activeCamera = GetViewport().GetCamera3D();
-		Vector3 worldMovement = activeCamera.GlobalBasis * new Vector3(input.X, 0, input.Y);
+		Vector3 worldMovement = camera.GlobalBasis * new Vector3(input.X, 0, input.Y);
 		worldMovement.Y = 0;
 		worldMovement = worldMovement.Normalized() * MOVE_SPEED;
 

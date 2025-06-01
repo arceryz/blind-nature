@@ -14,6 +14,7 @@ CallingIntervalRandom = 0.3
 CallingDistanceMin = 7.0
 CallingDistanceMax = 20.0
 RelocateDistanceForward = 20.0
+PlayerArrivalDistance = 5.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887222, 0)

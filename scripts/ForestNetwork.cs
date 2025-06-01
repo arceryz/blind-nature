@@ -77,7 +77,8 @@ public class ForestRoute
 			path = ForestNetwork.Instance.GetGuidePath(Junctions[i], Junctions[i + 1]);
 			float length = path.GetLength();
 			lastIndex = i;
-			if (offset < length)
+			// We can't include the last edge in the subtraction process.
+			if (offset < length || i == Junctions.Length - 2)
 			{
 				break;
 			}

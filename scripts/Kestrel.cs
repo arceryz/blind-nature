@@ -18,6 +18,7 @@ public partial class Kestrel : Node3D
 	[Export] float RelocateDistanceBackward = 10.0f;
 	[Export] float RelocateSpeed = 1.0f;
 	[Export] float RelocateHeight = 1.0f;
+	[Export] float PlayerArrivalDistance = 1.0f;
 
 	enum State
 	{
@@ -29,6 +30,7 @@ public partial class Kestrel : Node3D
 	Label3D StateLabel;
 	ForestRoute Route;
 
+	float PlayerTargetDistance = 0.0f;
 	float PlayerDistance = 0.0f;
 	float PlayerPathDistance = 0.0f;
 	float PlayerPathOffset = 0.0f;
@@ -54,58 +56,67 @@ public partial class Kestrel : Node3D
 	{
 		StateLabel.Text = CurrentState.ToString();
 		PlayerDistance = Player.Instance.GlobalPosition.DistanceTo(GlobalPosition);
+		PlayerPathOffset = Route.GetClosestOffset(Player.Instance.GlobalPosition);
+		PlayerPathDistance = Route.Sample(PlayerPathOffset).DistanceTo(Player.Instance.GlobalPosition);
+		PlayerTargetDistance = Player.Instance.GlobalPosition.DistanceTo(TargetLocation);
 
-		if (CurrentState == State.Calling)
+		switch (CurrentState)
 		{
-			if (CurrentOffset == TargetOffset)
-			{
-				CurrentState = State.Idle;
-				return;
-			}
-
-			NavDebugAgent.Instance.SetRoute(Route);
-			if (CallingTimer > CallingTimerDuration)
-			{
-				CallingTimer = 0.0f;
-				CallingTimerDuration = CallingInterval + GD.Randf() * CallingIntervalRandom;
-				CallingSFX.Play();
-
-				if (PlayerPathDistance > CallingDistanceMax)
+			case State.Calling:
+				// We switch to idle if the player has arrived.
+				if (PlayerTargetDistance < PlayerArrivalDistance)
 				{
-					RecalculateRoute();
+					CurrentState = State.Idle;
+					break;
 				}
-			}
-			CallingTimer += (float)delta;
 
-			if (PlayerDistance < CallingDistanceMin || PlayerDistance > CallingDistanceMax)
-			{
-				RelocateToGuidingPosition();
-			}
+				// Everytime we call, we also recalculate the route if too far.
+				// This avoids spamming the recalculate.
+				if (CallingTimer > CallingTimerDuration)
+				{
+					CallingTimer = 0.0f;
+					CallingTimerDuration = CallingInterval + GD.Randf() * CallingIntervalRandom;
+					CallingSFX.Play();
+
+					if (PlayerPathDistance > CallingDistanceMax)
+					{
+						RecalculateRoute();
+					}
+				}
+				CallingTimer += (float)delta;
+
+				// Relocate if too close or too far.
+				if (PlayerDistance < CallingDistanceMin || PlayerDistance > CallingDistanceMax)
+				{
+					RelocateToGuidingPosition();
+				}
+				break;
+
+			case State.Relocating:
+				// Code runs when in flight.
+				break;
+
+			case State.Idle:
+				break;
 		}
-
-			else if (CurrentState == State.Relocating)
-			{
-
-			}
 	}
 
 	public void RelocateToGuidingPosition()
 	{
-		PlayerPathOffset = Route.GetClosestOffset(Player.Instance.GlobalPosition);
-		PlayerPathDistance = Route.Sample(PlayerPathOffset).DistanceTo(Player.Instance.GlobalPosition);
+		float reloc = PlayerDistance < CallingDistanceMin ? RelocateDistanceForward : RelocateDistanceBackward;
+		float newOffset = PlayerPathOffset + Mathf.Max(reloc - PlayerPathDistance, 0.0f);
+		newOffset = Mathf.Min(newOffset, TargetOffset);
+		Vector3 newPosition = Route.Sample(newOffset);
 
-		if (PlayerPathDistance > CallingDistanceMax)
+		// No point in relocating if too close together.
+		if (Mathf.Abs(CurrentOffset - newOffset) < 0.01f)
 		{
 			return;
 		}
 
-		float reloc = PlayerDistance < CallingDistanceMin ? RelocateDistanceForward : RelocateDistanceBackward;
-		CurrentOffset = PlayerPathOffset + Mathf.Max(reloc - PlayerPathDistance, 0.0f);
-		CurrentOffset = Mathf.Min(CurrentOffset, TargetOffset);
-		Vector3 newPosition = Route.Sample(CurrentOffset);
-
 		CallingTimerDuration = 0.0f;
 		CurrentState = State.Relocating;
+		CurrentOffset = newOffset;
 
 		Tween tw = CreateTween();
 		tw.TweenProperty(this, "global_position", (GlobalPosition + newPosition) * 0.5f + Vector3.Up * RelocateHeight, RelocateSpeed / 2.0);
@@ -117,13 +128,14 @@ public partial class Kestrel : Node3D
 	{
 		Route = ForestNetwork.Instance.GetClosestPathRoute(Player.Instance.GlobalPosition, TargetLocation);
 		TargetOffset = Route.GetClosestOffset(TargetLocation);
-		RelocateToGuidingPosition();
+		CurrentState = State.Calling;
+		NavDebugAgent.Instance.SetRoute(Route);
 	}
 
 	public void NavigateTo(Vector3 location)
 	{
 		TargetLocation = location;
-		RecalculateRoute();
+		CallDeferred(MethodName.RecalculateRoute);
 	}
 
 }
