@@ -1,34 +1,33 @@
+using System;
+using System.Runtime.CompilerServices;
 using Godot;
 using Godot.Collections;
 
-public partial class Debug: Node
+public partial class Debug
 {
-	public static Debug Instance;
-
-	public enum Class
+	public enum That
 	{
 		ForestNetwork,
 		Kestrel,
+		Vibration,
 	};
+	public static Dictionary<That, bool> Settings = new();
+	static bool IsReady = false;
 
-	public Dictionary<Class, bool> Settings = new();
-
-	public override void _EnterTree()
+	static void LoadSettings()
 	{
-		Instance = this;
+		Settings[That.ForestNetwork] = ProjectSettings.GetSetting("debug/flags/forest_network").AsBool();
+		Settings[That.Kestrel] = ProjectSettings.GetSetting("debug/flags/kestrel").AsBool();
+		Settings[That.Vibration] = ProjectSettings.GetSetting("debug/flags/vibration").AsBool();
+		IsReady = true;
 	}
 
-	public override void _Ready()
+	public static void Log(That @class, string text)
 	{
-		Settings[Class.ForestNetwork] = ProjectSettings.GetSetting("debug/flags/forest_network").AsBool();
-		Settings[Class.Kestrel] = ProjectSettings.GetSetting("debug/flags/kestrel").AsBool();
-	}
-
-	public void Log(Class @class, string text)
-	{
+		if (!IsReady) LoadSettings();
 		if (Settings[@class])
 		{
-			GD.Print("LOG: " + text);
+			GD.Print(String.Format("{0,-15} {1}", @class.ToString() + ":", text));
 		}
 	}
 }

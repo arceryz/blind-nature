@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="VibrationProfile" load_steps=2 format=3 uid="uid://oiesuicvajyt"]
+
+[ext_resource type="Script" uid="uid://ct4v6xyh34k8v" path="res://scripts/VibrationProfile.cs" id="1_xaxoa"]
+
+[resource]
+script = ExtResource("1_xaxoa")
+df_strength = 1.0
+df_interval_fastest = 0.1
+df_interval_slowest = 1.0
+df_pulse_duration = 0.08
+step_strength = 0.6
+step_strong_balance = 0.0
+step_pulse_duration = 0.1
+metadata/_custom_type_script = "uid://ct4v6xyh34k8v"

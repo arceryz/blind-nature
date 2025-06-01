@@ -166,7 +166,7 @@ public partial class ForestNetwork : Node
 		{
 			Node3D node = JunctionList.GetChild<Node3D>(id);
 			graph.AddPoint(id, node.GlobalPosition, 1.0f); // Weight scale can be used to put lower preference on a point!
-			Debug.Instance.Log(Debug.Class.ForestNetwork, String.Format("Adding junction {0} with id={1} and index={2}", node.Name, id, node.GetIndex()));
+			Debug.Log(Debug.That.ForestNetwork, String.Format("Adding junction {0} with id={1} and index={2}", node.Name, id, node.GetIndex()));
 		}
 
 		foreach (GuidePath path in PathList.GetChildren())
@@ -175,7 +175,7 @@ public partial class ForestNetwork : Node
 			long id2 = path.Junction2.GetIndex();
 
 			graph.AddPath(id1, id2, path);
-			Debug.Instance.Log(Debug.Class.ForestNetwork, String.Format("Adding path {0} with length {1:0.#}", path.Name, path.GetLength()));
+			Debug.Log(Debug.That.ForestNetwork, String.Format("Adding path {0} with length {1:0.#}", path.Name, path.GetLength()));
 		}
 	}
 

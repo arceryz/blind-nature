@@ -58,10 +58,11 @@ public partial class Player : CharacterBody3D
 		}
 		if (e is InputEventMouseMotion motion && Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
-			Vector3 rot = camera.Rotation;
-			rot.X -= motion.Relative.Y * MOUSE_LOOK_H / 640.0f;
-			rot.Y -= motion.Relative.X * MOUSE_LOOK_V / 360.0f;
-			camera.Rotation = rot;
+			Rotation = Rotation with { Y = Rotation.Y - motion.Relative.X * MOUSE_LOOK_V / 360.0f };
+			camera.Rotation = camera.Rotation with
+			{
+				X = Mathf.Clamp(camera.Rotation.X - motion.Relative.Y * MOUSE_LOOK_H / 640.0f, -Mathf.Pi/2, Mathf.Pi/2)
+			};
 		}
 		if (e.IsActionPressed("blind_mode"))
 		{
@@ -81,20 +82,17 @@ public partial class Player : CharacterBody3D
 
 	void ProcessMovement(float delta)
 	{
-		// Regular movement.
+		// Get direction from input.
 		Vector2 input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-
-		Vector3 worldMovement = camera.GlobalBasis * new Vector3(input.X, 0, input.Y);
-		worldMovement.Y = 0;
-		worldMovement = worldMovement.Normalized() * MOVE_SPEED;
-		if (Input.IsActionPressed("debug_sprint"))
-		{
-			worldMovement *= 5.0f;
-		}
-
+		Vector3 direction = camera.GlobalBasis * new Vector3(input.X, 0, input.Y);
+		direction.Y = 0;
+		direction = direction.Normalized();
+		
+		// Set velocity vector.
+		float speed = MOVE_SPEED * (Input.IsActionPressed("debug_sprint") ? 5.0f: 1.0f);
 		Vector3 velocity = Velocity;
-		velocity.X = worldMovement.X;
-		velocity.Z = worldMovement.Z;
+		velocity.X = direction.X * speed;
+		velocity.Z = direction.Z * speed;
 
 		if (input.IsZeroApprox())
 		{
@@ -103,12 +101,13 @@ public partial class Player : CharacterBody3D
 		}
 		else
 		{
-			StepAccumulator += worldMovement.Length() * delta;
+			StepAccumulator += speed * delta;
 		}
 
 		if (StepAccumulator > StepSize)
 		{
 			StepSFX.Play();
+			Vibration.Instance.PlayStep(1.0f);
 			StepAccumulator = 0.0f;
 		}
 
