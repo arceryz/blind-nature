@@ -153,4 +153,13 @@ public partial class Kestrel : Node3D
 		CallDeferred(MethodName.RecalculateRoute);
 	}
 
+	public bool IsNavigating()
+	{
+		return Route != null && CurrentState != State.Idle;
+	}
+
+	public float GetVibrationFeedbackRadius()
+	{
+		return CallingDistanceMin * 0.5f;
+	}
 }

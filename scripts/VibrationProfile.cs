@@ -4,13 +4,13 @@ using Godot;
 public partial class VibrationProfile : Resource
 {
 	[ExportGroup("Directional Feedback")]
-	[Export(PropertyHint.Range, "0, 1")] public float df_strength;
-	[Export(PropertyHint.Range, "0, 1")] public float df_interval_fastest;
-	[Export(PropertyHint.Range, "0, 1")] public float df_interval_slowest;
-	[Export(PropertyHint.Range, "0, 1")] public float df_pulse_duration;
+	[Export(PropertyHint.Range, "0, 1")] public float DfStrength;
+	[Export(PropertyHint.Range, "0, 1")] public float DfIntervalFastest;
+	[Export(PropertyHint.Range, "0, 1")] public float DfIntervalSlowest;
+	[Export(PropertyHint.Range, "0, 1")] public float DfPulseDuration;
 
 	[ExportGroup("Steps")]
-	[Export(PropertyHint.Range, "0, 1")] public float step_strength;
-	[Export(PropertyHint.Range, "0, 1")] public float step_strong_balance;
-	[Export(PropertyHint.Range, "0, 1")] public float step_pulse_duration;
+	[Export(PropertyHint.Range, "0, 1")] public float StepStrong;
+	[Export(PropertyHint.Range, "0, 1")] public float StepWeak;
+	[Export(PropertyHint.Range, "0, 1")] public float StepPulseDuration;
 }

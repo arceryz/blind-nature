@@ -5,10 +5,11 @@ using System.Data.Common;
 
 // The globally accessible class for managing vibration.
 // PS4 controllers require DS4Windows currently.
+[GlobalClass]
 public partial class Vibration : Node
 {
 	public static Vibration Instance;
-	VibrationProfile Profile;
+	[Export] VibrationProfile Profile;
 	int Device = 0;
 
 	float PulseTimer = 0.0f;
@@ -16,6 +17,7 @@ public partial class Vibration : Node
 	float PulseDuration = 0.0f;
 	float PulseWeak = 0.0f;
 	float PulseStrong = 0.0f;
+	float PulseLock = 0.0f;
 
 	public override void _EnterTree()
 	{
@@ -33,12 +35,14 @@ public partial class Vibration : Node
 		// Play pulses.
 		if (PulseInterval > 0.0f)
 		{
-			if (PulseTimer > PulseInterval)
+			if (PulseTimer > PulseInterval && PulseLock == 0.0f)
 			{
 				PulseTimer = 0.0f;
+				PulseInterval = 0.0f;
 				PlayRaw(PulseWeak, PulseStrong, PulseDuration);
 			}
 			PulseTimer += (float)delta;
+			PulseLock = Mathf.Max(0.0f, PulseLock - (float)delta);
 		}
 	}
 
@@ -76,29 +80,34 @@ public partial class Vibration : Node
 
 	/// <summary>
 	/// Play vibration briefly with intensity based on the direction to the target.
+	/// The target is relative to the origin of the aim in the zero vector.
 	/// The radius is used in calculating whether the current direction is on a collision course.
 	/// </summary>
-	public void PlayDirectionalFeedback(Vector2 origin, Vector2 direction, Vector2 target, float targetRadius)
+	public void PlayDirectionalFeedback(Vector2 direction, Vector2 target, float targetRadius)
 	{
-		Vector2 opt = (target - origin).Normalized();
-		Vector2 opt_left = (new Vector2(-opt.Y, opt.X) * targetRadius + target - origin).Normalized();
+		Vector2 opt = target.Normalized();
+		Vector2 opt_left = (new Vector2(-opt.Y, opt.X) * targetRadius + target).Normalized();
 		float alpha = opt.Dot(opt_left);
-		float alignment = Mathf.Min(1.0f, (opt.Dot(direction) + 1.0f) / (alpha + 1.0f));
+		float alignment = direction.IsZeroApprox() ? 0.0f : Mathf.Min(1.0f, (opt.Dot(direction) + 1.0f) / (alpha + 1.0f));
 
-		PulseDuration = Profile.df_pulse_duration;
-		PulseStrong = Profile.df_strength;
-		PulseWeak = Profile.df_strength;
-		PulseInterval = Mathf.Lerp(Profile.df_interval_slowest, Profile.df_interval_fastest, alignment);
+		PulseDuration = Profile.DfPulseDuration;
+		PulseStrong = Profile.DfStrength;
+		PulseWeak = Profile.DfStrength;
+		PulseInterval = Mathf.Lerp(Profile.DfIntervalSlowest, Profile.DfIntervalFastest, alignment);
+
+		Debug.Log(Debug.That.Vibration, String.Format("dir={0}, target={1}, r={2}, align={3}, inter={4}", direction, target, targetRadius, alignment, PulseInterval));
 	}
 
 	/// <summary>
 	/// Play a vibration for a footstep once. Should be called at each step.
+	/// Locks any pulses from overriding this vibration.
 	/// </summary>
 	/// <param name="strength"> The strength of this step from 0 to 1. </param>
 	public void PlayStep(float strength)
 	{
-		float weak = Profile.step_strength * (1.0f - Profile.step_strong_balance);
-		float strong = Profile.step_strength * Profile.step_strong_balance;
-		PlayRaw(weak, strong, Profile.step_pulse_duration);
+		float weak = Profile.StepWeak;
+		float strong = Profile.StepStrong;
+		PulseLock = Profile.StepPulseDuration;
+		PlayRaw(weak, strong, Profile.StepPulseDuration);
 	}
 }
