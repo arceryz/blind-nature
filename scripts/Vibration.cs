@@ -89,6 +89,7 @@ public partial class Vibration : Node
 		Vector2 opt_left = (new Vector2(-opt.Y, opt.X) * targetRadius + target).Normalized();
 		float alpha = opt.Dot(opt_left);
 		float alignment = direction.IsZeroApprox() ? 0.0f : Mathf.Min(1.0f, (opt.Dot(direction) + 1.0f) / (alpha + 1.0f));
+		if (target.Length() < targetRadius) alignment = 1.0f;
 
 		PulseDuration = Profile.DfPulseDuration;
 		PulseStrong = Profile.DfStrength;

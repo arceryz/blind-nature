@@ -110,7 +110,7 @@ public partial class NavDebugAgent : Node3D
 		text += String.Format("dist={0:0.00}, junction={1}\n", junctionDist, junc.Name);
 		text += String.Format("totalOffset={0:0.00}\n", totalOffset);
 		text += String.Format("stray={0:0.00}\n", (StartPoint.GlobalPosition-offsetPoint).Length());
-		text += String.Format("stepAccum={0:0.0}\n", Player.Instance.StepAccumulator);
+		text += String.Format("stepAccum={0:0.0}\n", Liora.Instance.StepAccumulator);
 
 		PathPoint.GlobalPosition = offsetPoint;
 		DebugLabel.Text = text;

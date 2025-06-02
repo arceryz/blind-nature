@@ -58,14 +58,15 @@ public partial class Kestrel : Node3D
 	public override void _Process(double delta)
 	{
 		StateLabel.Text = CurrentState.ToString();
-		PlayerDistance = Player.Instance.GlobalPosition.DistanceTo(GlobalPosition);
-		PlayerPathOffset = Route.GetClosestOffset(Player.Instance.GlobalPosition);
-		PlayerPathDistance = Route.Sample(PlayerPathOffset).DistanceTo(Player.Instance.GlobalPosition);
-		PlayerTargetDistance = Player.Instance.GlobalPosition.DistanceTo(TargetLocation);
 
 		switch (CurrentState)
 		{
 			case State.Calling:
+				PlayerDistance = Liora.Instance.GlobalPosition.DistanceTo(GlobalPosition);
+				PlayerPathOffset = Route.GetClosestOffset(Liora.Instance.GlobalPosition);
+				PlayerPathDistance = Route.Sample(PlayerPathOffset).DistanceTo(Liora.Instance.GlobalPosition);
+				PlayerTargetDistance = Liora.Instance.GlobalPosition.DistanceTo(TargetLocation);
+
 				// We switch to idle if the player has arrived.
 				if (PlayerTargetDistance < PlayerArrivalDistance)
 				{
@@ -141,10 +142,10 @@ public partial class Kestrel : Node3D
 
 	public void RecalculateRoute()
 	{
-		Route = ForestNetwork.Instance.GetClosestPathRoute(Player.Instance.GlobalPosition, TargetLocation);
+		Route = ForestNetwork.Instance.GetClosestPathRoute(Liora.Instance.GlobalPosition, TargetLocation);
 		TargetOffset = Route.GetClosestOffset(TargetLocation);
 		CurrentState = State.Calling;
-		NavDebugAgent.Instance.SetRoute(Route);
+		//NavDebugAgent.Instance.SetRoute(Route);
 	}
 
 	public void NavigateTo(Vector3 location)
@@ -160,6 +161,6 @@ public partial class Kestrel : Node3D
 
 	public float GetVibrationFeedbackRadius()
 	{
-		return CallingDistanceMin * 0.5f;
+		return 1.0f;
 	}
 }

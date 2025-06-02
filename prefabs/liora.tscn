@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://c16bn1jtiqhig"]
+
+[ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://scripts/Liora.cs" id="1_72ieh"]
+[ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://assets/materials/mat_blue.tres" id="2_4dohe"]
+[ext_resource type="Script" uid="uid://c0kohqiswkmlx" path="res://scripts/LioraBow.cs" id="2_ht1c8"]
+[ext_resource type="AudioStream" uid="uid://cwlacrrbcdjos" path="res://sounds/step_sfx_stream.tres" id="3_1txc5"]
+[ext_resource type="AudioStream" uid="uid://brtxpy5yyqoo3" path="res://sounds/Placeholder/big_bell.wav" id="3_qokbf"]
+[ext_resource type="AudioStream" uid="uid://dxxvytbv1iv4b" path="res://sounds/step_leaves_sfx_stream.tres" id="4_ht1c8"]
+[ext_resource type="AudioStream" uid="uid://bxu3qynsc8874" path="res://sounds/Placeholder/bow_release.wav" id="4_xi8dm"]
+[ext_resource type="AudioStream" uid="uid://cp7nu5ssyrycc" path="res://sounds/Placeholder/bow_draw.wav" id="5_esfq6"]
+[ext_resource type="AudioStream" uid="uid://ctnxc4hmm0wc1" path="res://sounds/Placeholder/reward.wav" id="9_oveln"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_72ieh"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_g2jcq"]
+stream_count = 2
+stream_0/stream = ExtResource("4_ht1c8")
+stream_0/volume = -3.0
+stream_1/stream = ExtResource("3_1txc5")
+stream_1/volume = 0.0
+
+[node name="Liora" type="CharacterBody3D" node_paths=PackedStringArray("TargetHitSfx", "StepSFX", "ArcheryLocations")]
+collision_layer = 2
+script = ExtResource("1_72ieh")
+TargetHitSfx = NodePath("TargetHitSfx")
+StepSFX = NodePath("StepSFX_Layers")
+StepSize = 3.0
+ArcheryLocations = []
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_fp3wc")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.776736, 0)
+current = true
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.776736, 0)
+current = true
+
+[node name="LioraBow" type="Node3D" parent="Camera" node_paths=PackedStringArray("ConfirmSfx", "ArrowReleaseSfx", "DrawStringSfx", "Camera")]
+unique_name_in_owner = true
+script = ExtResource("2_ht1c8")
+ConfirmSfx = NodePath("ConfirmSfx")
+ArrowReleaseSfx = NodePath("ArrowReleaseSfx")
+DrawStringSfx = NodePath("DrawStringSfx")
+Camera = NodePath("..")
+
+[node name="ConfirmSfx" type="AudioStreamPlayer" parent="Camera/LioraBow"]
+stream = ExtResource("3_qokbf")
+volume_db = -20.0
+pitch_scale = 4.0
+
+[node name="ArrowReleaseSfx" type="AudioStreamPlayer3D" parent="Camera/LioraBow"]
+stream = ExtResource("4_xi8dm")
+volume_db = -10.0
+
+[node name="DrawStringSfx" type="AudioStreamPlayer3D" parent="Camera/LioraBow"]
+stream = ExtResource("5_esfq6")
+volume_db = -25.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_72ieh")
+surface_material_override/0 = ExtResource("2_4dohe")
+
+[node name="StepSFX_Layers" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamSynchronized_g2jcq")
+
+[node name="TargetHitSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_oveln")
+volume_db = -20.0

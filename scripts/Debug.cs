@@ -10,6 +10,7 @@ public partial class Debug
 		ForestNetwork,
 		Kestrel,
 		Vibration,
+		LioraBow,
 	};
 	public static Dictionary<That, bool> Settings = new();
 	static bool IsReady = false;
@@ -19,6 +20,7 @@ public partial class Debug
 		Settings[That.ForestNetwork] = ProjectSettings.GetSetting("debug/flags/forest_network").AsBool();
 		Settings[That.Kestrel] = ProjectSettings.GetSetting("debug/flags/kestrel").AsBool();
 		Settings[That.Vibration] = ProjectSettings.GetSetting("debug/flags/vibration").AsBool();
+		Settings[That.LioraBow] = ProjectSettings.GetSetting("debug/flags/liora_bow").AsBool();
 		IsReady = true;
 	}
 

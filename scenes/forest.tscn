@@ -1,14 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://rop4mdjkcm0p"]
+[gd_scene load_steps=29 format=3 uid="uid://rop4mdjkcm0p"]
 
 [ext_resource type="Material" uid="uid://drxc4hg7i4uuw" path="res://assets/materials/mat_green.tres" id="1_bgcxa"]
-[ext_resource type="PackedScene" uid="uid://c16bn1jtiqhig" path="res://prefabs/player.tscn" id="1_xijx7"]
+[ext_resource type="AudioStream" uid="uid://csivw3rx3cxbu" path="res://sounds/Placeholder/northern_forest.mp3" id="1_j3csf"]
+[ext_resource type="PackedScene" uid="uid://c16bn1jtiqhig" path="res://prefabs/liora.tscn" id="1_xijx7"]
 [ext_resource type="PackedScene" uid="uid://bjyarlckxl1wq" path="res://prefabs/structures/hut1.tscn" id="2_0afsd"]
 [ext_resource type="PackedScene" uid="uid://bo6c002tkqq2v" path="res://prefabs/entities/kestrel.tscn" id="4_i1yi8"]
 [ext_resource type="Script" uid="uid://ccyyya05un15d" path="res://scripts/ForestNetwork.cs" id="4_sek5r"]
 [ext_resource type="PackedScene" uid="uid://j836iymgxktk" path="res://prefabs/junction.tscn" id="4_yj5dr"]
+[ext_resource type="PackedScene" uid="uid://dl80dmjraoqp6" path="res://prefabs/entities/practice_target.tscn" id="5_j3csf"]
 [ext_resource type="Script" uid="uid://30yifuwdlap4" path="res://scripts/GuidePath.cs" id="5_xr56k"]
 [ext_resource type="Script" uid="uid://bfs0pqimefcl3" path="res://scripts/CameraToggle.cs" id="8_0nboi"]
-[ext_resource type="PackedScene" uid="uid://dpfej0lclpc6g" path="res://prefabs/entities/nav_debug_agent.tscn" id="8_qm7rg"]
 [ext_resource type="Script" uid="uid://0cprjmcr3bqp" path="res://scripts/Vibration.cs" id="10_ercsu"]
 [ext_resource type="Resource" uid="uid://oiesuicvajyt" path="res://settings/vibration_profile.tres" id="11_j3csf"]
 
@@ -106,6 +107,11 @@ point_count = 8
 
 [node name="Audio" type="Node" parent="."]
 
+[node name="AmbientForestSFX" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("1_j3csf")
+volume_db = -10.0
+autoplay = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bgcxa")
 
@@ -127,12 +133,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251962, 0)
 
 [node name="Entities" type="Node" parent="."]
 
-[node name="Player" parent="Entities" node_paths=PackedStringArray("ArcheryLocations") instance=ExtResource("1_xijx7")]
+[node name="Liora" parent="Entities" node_paths=PackedStringArray("ArcheryLocations") instance=ExtResource("1_xijx7")]
 transform = Transform3D(0.0116934, 0, 0.999932, 0, 1, 0, -0.999932, 0, 0.0116934, 2.13564, 0.939108, -0.00838923)
 ArcheryLocations = [NodePath("../../ForestNetwork/Junctions/Forest3"), NodePath("../../ForestNetwork/Junctions/Forest6"), NodePath("../../ForestNetwork/Junctions/Forest7")]
 
 [node name="Kestrel" parent="Entities" instance=ExtResource("4_i1yi8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.7573, -1.90735e-06, -2.67981)
+
+[node name="PracticeTarget" parent="Entities" instance=ExtResource("5_j3csf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.9355, -0.92185, 59.3966)
+
+[node name="PracticeTarget2" parent="Entities" instance=ExtResource("5_j3csf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -117.907, -0.92185, -55.198)
+
+[node name="PracticeTarget3" parent="Entities" instance=ExtResource("5_j3csf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2573, 4.16203, -63.4105)
 
 [node name="ForestNetwork" type="Node" parent="."]
 script = ExtResource("4_sek5r")
@@ -261,9 +276,6 @@ transform = Transform3D(0.573577, -0.59222, 0.565938, 0, 0.690883, 0.722967, -0.
 projection = 1
 size = 100.0
 script = ExtResource("8_0nboi")
-
-[node name="NavDebugAgent" parent="Debug" instance=ExtResource("8_qm7rg")]
-Maps = null
 
 [node name="Label" type="Label" parent="Debug"]
 offset_left = 947.0

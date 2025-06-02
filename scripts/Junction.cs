@@ -25,7 +25,7 @@ public partial class Junction : Area3D
 
 	void _OnAreaBodyEntered(Node3D body)
 	{
-		if (body is Player)
+		if (body is Liora)
 		{
 			EmitSignal(SignalName.PlayerEntered);
 		}
