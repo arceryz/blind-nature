@@ -8,6 +8,9 @@ public partial class Kestrel : Node3D
 {
 	public static Kestrel Instance;
 
+	[Signal]
+	public delegate void NavigationFinishedEventHandler();
+
 	[ExportGroup("SFX")]
 	[Export] AudioStreamPlayer3D CallingSFX;
 	[Export] AudioStreamPlayer3D FlappingSFX;
@@ -71,6 +74,7 @@ public partial class Kestrel : Node3D
 				if (PlayerTargetDistance < PlayerArrivalDistance)
 				{
 					CurrentState = State.Idle;
+					EmitSignal(SignalName.NavigationFinished);
 					break;
 				}
 

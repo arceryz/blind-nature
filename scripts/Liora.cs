@@ -53,6 +53,7 @@ public partial class Liora : CharacterBody3D
 			ForestNetwork.Instance.Ready += _NetworkReady;
 		}
 		Bow.ArrowHit += _OnArrowHitTarget;
+		Kestrel.Instance.NavigationFinished += _OnKestrelNavigationFinished;
 	}
 
 	public void _NetworkReady()
@@ -65,16 +66,23 @@ public partial class Liora : CharacterBody3D
 		CurrentLocation = (CurrentLocation + 1) % ArcheryLocations.Count;
 		Kestrel.Instance.NavigateTo(ArcheryLocations[CurrentLocation].GlobalPosition);
 		TargetHitSfx.Play();
+		Bow.StopTargeting();
+	}
+
+	public void _OnKestrelNavigationFinished()
+	{
+		Bow.PickClosestTarget();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (UserInterface.Instance.IsMenuActive()) return;
 		switch (CurrentState)
 		{
 			case State.Walking:
 				AimSpeed = 1.0f;
 				Camera.Rotation = Camera.Rotation with { X = Mathf.Lerp(Camera.Rotation.X, 0.0f, (float)delta * 10.0f) };
-				ProcessRouteDirectionFeedback((float)delta);
+				//ProcessRouteDirectionFeedback((float)delta);
 				ProcessMovement((float)delta, MoveSpeed);
 				break;
 
@@ -98,31 +106,13 @@ public partial class Liora : CharacterBody3D
 
 	public override void _Input(InputEvent e)
 	{	
-		if (e.IsActionPressed("free_camera"))
-		{
-			Input.MouseMode = Input.MouseMode == Input.MouseModeEnum.Captured ? Input.MouseModeEnum.Visible : Input.MouseModeEnum.Captured;
-		}
-		if (e is InputEventMouseMotion motion && Input.MouseMode == Input.MouseModeEnum.Captured)
+		if (e is InputEventMouseMotion motion && !UserInterface.Instance.IsMenuActive())
 		{
 			Rotation = Rotation with { Y = Rotation.Y - motion.Relative.X * MouseLookV / 360.0f };
 			Camera.Rotation = Camera.Rotation with
 			{
 				X = Mathf.Clamp(Camera.Rotation.X - motion.Relative.Y * MouseLookH / 640.0f, -Mathf.Pi / 2, Mathf.Pi / 2)
 			};
-		}
-		if (e.IsActionPressed("blind_mode"))
-		{
-			// Should make this a GUI toggle!
-			if (Camera.Current)
-				Camera.ClearCurrent(false);
-			else
-				Camera.MakeCurrent();
-		}
-
-		if (e.IsActionPressed("ui_accept"))
-		{
-			CurrentLocation = (CurrentLocation + 1) % ArcheryLocations.Count;
-			Kestrel.Instance.NavigateTo(ArcheryLocations[CurrentLocation].GlobalPosition);
 		}
 	}
 

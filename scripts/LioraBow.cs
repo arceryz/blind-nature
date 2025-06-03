@@ -12,6 +12,7 @@ public partial class LioraBow : Node3D
 	[Export] AudioStreamPlayer ConfirmSfx;
 	[Export] AudioStreamPlayer3D ArrowReleaseSfx;
 	[Export] AudioStreamPlayer3D DrawStringSfx;
+	[Export] AudioStreamPlayer3D TargetBeatSfx;
 
 	[ExportGroup("Properties")]
 	[Export] Camera3D Camera;
@@ -31,13 +32,17 @@ public partial class LioraBow : Node3D
 	bool IsOnTarget = false;
 	public float AimProximity = 0.0f;
 
-	float DrawDelayTimer = 0.0f;
+	QuickTimer ConfirmCueTimer;
+	QuickTimer DrawDelayTimer;
 
 	bool IsAiming = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ConfirmCueTimer = new(this, () => ConfirmSfx.Play(), 1.0f, 1.0f, false, true);
+		DrawDelayTimer = new(this, null, 1.0f, 0.0f, true, false);
+
 		AimVision = new ColorRect();
 		AimVision.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 		AddChild(AimVision);
@@ -46,18 +51,17 @@ public partial class LioraBow : Node3D
 
 	public void DrawString()
 	{
-		if (DrawDelayTimer > 0.0f) return;
+		if (!DrawDelayTimer.IsFinished()) return;
 		IsAiming = true;
 		DrawStringSfx.Play();
-		PickClosestTarget();
 	}
 
 	public void ReleaseArrow()
 	{
 		IsAiming = false;
 		ArrowReleaseSfx.Play();
-		ConfirmSfx.Stop();
-		DrawDelayTimer = 1.0f;
+		ConfirmCueTimer.Stop();
+		DrawDelayTimer.Start();
 
 		if (IsOnTarget)
 		{
@@ -94,18 +98,33 @@ public partial class LioraBow : Node3D
 	{
 		Debug.Log(Debug.That.LioraBow, String.Format("Targeting {0}", target.Name));
 		AimTarget = target;
+		TargetBeatSfx.Play();
+		TargetBeatSfx.GlobalPosition = AimTarget.GlobalPosition;
+	}
+
+	public void StopTargeting()
+	{
+		if (AimTarget != null)
+		{
+			TargetBeatSfx.Stop();
+		}
 	}
 
 	public override void _Process(double delta)
 	{
-		DrawDelayTimer = Mathf.Max(DrawDelayTimer - (float)delta, 0.0f);
 		if (IsAiming)
 		{
 			AimVision.Color = Colors.Black with { A = 0.5f };
 			AimVision.Show();
 			ProcessTargetScreen();
 			AimVision.QueueRedraw();
-			if (TargetVisible) Vibration.Instance.PlayDirectionalFeedback(AimDirection, TargetScreenCentered, TargetScreenRadius);
+			if (TargetVisible)
+			{
+				Vibration.Instance.PlayDirectionalFeedback(AimDirection, TargetScreenCentered, TargetScreenRadius);
+			}
+			else
+			{
+			}
 		}
 		else
 		{
@@ -152,15 +171,9 @@ public partial class LioraBow : Node3D
 		AimProximity = targetView.AngleTo(Vector3.Forward) / Mathf.Pi;
 		TargetVisible = targetView.Z < 0.0f;
 
-		bool nowOnTarget = TargetScreenCentered.Length() < TargetScreenRadius;
-		if (nowOnTarget && !IsOnTarget)
-		{
-			ConfirmSfx.Play();
-		}
-		if (!nowOnTarget && IsOnTarget)
-		{
-			ConfirmSfx.Stop();
-		}
+		bool nowOnTarget = TargetScreenCentered.Length() < TargetScreenRadius && TargetVisible;
+		if (nowOnTarget && !IsOnTarget) ConfirmCueTimer.Start();
+		if (!nowOnTarget && IsOnTarget) ConfirmCueTimer.Stop();
 		IsOnTarget = nowOnTarget;
 
 		Debug.Log(Debug.That.LioraBow, String.Format("screen={0}, radius={1}, aimdist={2}, visible={3}, dir={4}", TargetScreen, TargetScreenRadius, AimProximity, TargetVisible, AimDirection));
@@ -186,6 +199,6 @@ public partial class LioraBow : Node3D
 
 	public bool CanDraw()
 	{
-		return DrawDelayTimer == 0.0f;
+		return DrawDelayTimer.IsFinished();
 	}
 }
