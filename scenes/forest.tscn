@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://rop4mdjkcm0p"]
+[gd_scene load_steps=35 format=3 uid="uid://rop4mdjkcm0p"]
 
 [ext_resource type="Material" uid="uid://drxc4hg7i4uuw" path="res://assets/materials/mat_green.tres" id="1_bgcxa"]
 [ext_resource type="Script" uid="uid://bxkujq5ovtx85" path="res://scripts/AudioController.cs" id="1_cf55d"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://0cprjmcr3bqp" path="res://scripts/Vibration.cs" id="10_ercsu"]
 [ext_resource type="Resource" uid="uid://oiesuicvajyt" path="res://settings/vibration_profile.tres" id="11_j3csf"]
 [ext_resource type="Script" uid="uid://bd45ctlqkdptf" path="res://scripts/UserInterface.cs" id="13_dabdc"]
+[ext_resource type="Texture2D" uid="uid://bgkxie6xk6sq8" path="res://assets/blindfold.png" id="17_i1j6r"]
+[ext_resource type="Script" uid="uid://bcvlqnt3iisaq" path="res://scripts/Blindfold.cs" id="18_3akcx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xijx7"]
 
@@ -32,82 +34,85 @@ sky = SubResource("Sky_0afsd")
 
 [sub_resource type="Curve3D" id="Curve3D_bgcxa"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -11.1315, 0, 5.21424, 0, 0, 0, 0, 0, 0, -20.3393, 0, 10.5951, 0, 0, 0, 0, 0, 0, -33.1853, 0, 12.0211, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7.8792, 0, -0.103804, 0, 0, 0, 0, 0, 0, -11.1315, 0, 5.21424, 0, 0, 0, 0, 0, 0, -20.3393, 0, 10.5951, 0, 0, 0, 0, 0, 0, -33.1853, 0, 12.0211, 0, 0, 0, 0, 0, 0, -42.4174, 0, 21.7978),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
 
 [sub_resource type="Curve3D" id="Curve3D_xr56k"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -39.4512, 0, 27.8878, 0, 0, 0, 0, 0, 0, -32.4864, 0, 32.4417, 0, 0, 0, 0, 0, 0, -22.8428, 0, 34.4955, 0, 0, 0, 0, 0, 0, -17.3066, 0, 41.371, 0, 0, 0, 0, 0, 0, -17.8424, 0, 50.3003, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -42.4174, 0, 21.7978, 0, 0, 0, 0, 0, 0, -39.4512, 0, 27.8878, 0, 0, 0, 0, 0, 0, -32.4864, 0, 32.4417, 0, 0, 0, 0, 0, 0, -22.8428, 0, 34.4955, 0, 0, 0, 0, 0, 0, -17.3066, 0, 41.371, 0, 0, 0, 0, 0, 0, -17.8424, 0, 50.3003, 0, 0, 0, 0, 0, 0, -21.3847, -7.62939e-06, 56.0027),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 7
 
 [sub_resource type="Curve3D" id="Curve3D_sek5r"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -26.891, 0, 62.1564, 0, 0, 0, 0, 0, 0, -27.7343, 0, 68.4429, 0, 0, 0, 0, 0, 0, -30.1109, 0, 74.4994, 0, 0, 0, 0, 0, 0, -35.5541, 0, 76.7993, 0, 0, 0, 0, 0, 0, -41.3805, 0, 74.8827, 0, 0, 0, 0, 0, 0, -45.7504, 0, 70.7428, 0, 0, 0, 0, 0, 0, -50.8102, 0, 66.373, 0, 0, 0, 0, 0, 0, -56.9434, 0, 64.4564, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -21.3847, -7.62939e-06, 56.0027, 0, 0, 0, 0, 0, 0, -26.891, 0, 62.1564, 0, 0, 0, 0, 0, 0, -27.7343, 0, 68.4429, 0, 0, 0, 0, 0, 0, -30.1109, 0, 74.4994, 0, 0, 0, 0, 0, 0, -35.5541, 0, 76.7993, 0, 0, 0, 0, 0, 0, -41.3805, 0, 74.8827, 0, 0, 0, 0, 0, 0, -45.7504, 0, 70.7428, 0, 0, 0, 0, 0, 0, -50.8102, 0, 66.373, 0, 0, 0, 0, 0, 0, -56.9434, 0, 64.4564, 0, 0, 0, 0, 0, 0, -64.5363, 0, 66.7551),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 10
 
 [sub_resource type="Curve3D" id="Curve3D_i1yi8"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -49.5538, 0, 27.4246, 0, 0, 0, 0, 0, 0, -52.8914, 0, 32.3268, 0, 0, 0, 0, 0, 0, -51.3269, 0, 39.5235, 0, 0, 0, 0, 0, 0, -48.1979, 0, 46.0945, 0, 0, 0, 0, 0, 0, -52.057, 0, 52.0396, 0, 0, 0, 0, 0, 0, -59.0452, 0, 54.5429, 0, 0, 0, 0, 0, 0, -64.1559, 0, 59.5493, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -42.4174, 0, 21.7978, 0, 0, 0, 0, 0, 0, -49.5538, 0, 27.4246, 0, 0, 0, 0, 0, 0, -52.8914, 0, 32.3268, 0, 0, 0, 0, 0, 0, -51.3269, 0, 39.5235, 0, 0, 0, 0, 0, 0, -48.1979, 0, 46.0945, 0, 0, 0, 0, 0, 0, -52.057, 0, 52.0396, 0, 0, 0, 0, 0, 0, -59.0452, 0, 54.5429, 0, 0, 0, 0, 0, 0, -64.1559, 0, 59.5493, 0, 0, 0, 0, 0, 0, -64.5363, 0, 66.7551),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 9
 
 [sub_resource type="Curve3D" id="Curve3D_qm7rg"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -74.3796, 0, 71.5723, 0, 0, 0, 0, 0, 0, -83.8583, 0, 70.231, 0, 0, 0, 0, 0, 0, -88.2399, 0, 59.9476, 0, 0, 0, 0, 0, 0, -98.2551, 0, 53.3304, 0, 0, 0, 0, 0, 0, -103.439, 0, 45.7269, 0, 0, 0, 0, 0, 0, -100.845, 0, 37.8578, 0, 0, 0, 0, 0, 0, -94.4964, 0, 32.2243, 0, 0, 0, 0, 0, 0, -93.2445, 0, 24.6235, 0, 0, 0, 0, 0, 0, -88.8629, 0, 19.1688, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -64.5363, 0, 66.7551, 0, 0, 0, 0, 0, 0, -74.3796, 0, 71.5723, 0, 0, 0, 0, 0, 0, -83.8583, 0, 70.231, 0, 0, 0, 0, 0, 0, -88.2399, 0, 59.9476, 0, 0, 0, 0, 0, 0, -98.2551, 0, 53.3304, 0, 0, 0, 0, 0, 0, -103.439, 0, 45.7269, 0, 0, 0, 0, 0, 0, -100.845, 0, 37.8578, 0, 0, 0, 0, 0, 0, -94.4964, 0, 32.2243, 0, 0, 0, 0, 0, 0, -93.2445, 0, 24.6235, 0, 0, 0, 0, 0, 0, -88.8629, 0, 19.1688, 0, 0, 0, 0, 0, 0, -82.9391, 7.62939e-06, 18.2428),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 11
 
 [sub_resource type="Curve3D" id="Curve3D_0nboi"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -86.7553, 0, 11.4375, 0, 0, 0, 0, 0, 0, -95.5272, 0, 9.72443, 0, 0, 0, 0, 0, 0, -99.2986, 0, 2.78999, 0, 0, 0, 0, 0, 0, -94.3107, 0, -2.56291, 0, 0, 0, 0, 0, 0, -96.8654, 0, -9.01072, 0, 0, 0, 0, 0, 0, -104.043, 0, -12.1738, 0, 0, 0, 0, 0, 0, -112.802, 0, -14.1203, 0, 0, 0, 0, 0, 0, -115.114, 0, -20.6898, 0, 0, 0, 0, 0, 0, -110.613, 0, -25.6777, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -82.9391, 7.62939e-06, 18.2428, 0, 0, 0, 0, 0, 0, -86.7553, 0, 11.4375, 0, 0, 0, 0, 0, 0, -95.5272, 0, 9.72443, 0, 0, 0, 0, 0, 0, -99.2986, 0, 2.78999, 0, 0, 0, 0, 0, 0, -94.3107, 0, -2.56291, 0, 0, 0, 0, 0, 0, -96.8654, 0, -9.01072, 0, 0, 0, 0, 0, 0, -104.043, 0, -12.1738, 0, 0, 0, 0, 0, 0, -112.802, 0, -14.1203, 0, 0, 0, 0, 0, 0, -115.114, 0, -20.6898, 0, 0, 0, 0, 0, 0, -110.613, 0, -25.6777, 0, 0, 0, 0, 0, 0, -104.792, 0, -27.2845),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 11
 
 [sub_resource type="Curve3D" id="Curve3D_3knxq"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -97.5181, 0, -25.5994, 0, 0, 0, 0, 0, 0, -91.26, 0, -23.7219, 0, 0, 0, 0, 0, 0, -85.8364, 0, -29.1456, 0, 0, 0, 0, 0, 0, -84.0632, 0, -35.9252, 0, 0, 0, 0, 0, 0, -83.1245, 0, -42.6005, 0, 0, 0, 0, 0, 0, -78.0138, 0, -45.3123, 0, 0, 0, 0, 0, 0, -71.5471, 0, -41.3488, 0, 0, 0, 0, 0, 0, -72.1729, 0, -34.9865, 0, 0, 0, 0, 0, 0, -71.0256, 0, -29.8757, 0, 0, 0, 0, 0, 0, -65.4976, 0, -27.0596, 0, 0, 0, 0, 0, 0, -59.5525, 0, -29.0413, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -104.792, 0, -27.2845, 0, 0, 0, 0, 0, 0, -97.5181, 0, -25.5994, 0, 0, 0, 0, 0, 0, -91.26, 0, -23.7219, 0, 0, 0, 0, 0, 0, -85.8364, 0, -29.1456, 0, 0, 0, 0, 0, 0, -84.0632, 0, -35.9252, 0, 0, 0, 0, 0, 0, -83.1245, 0, -42.6005, 0, 0, 0, 0, 0, 0, -78.0138, 0, -45.3123, 0, 0, 0, 0, 0, 0, -71.5471, 0, -41.3488, 0, 0, 0, 0, 0, 0, -72.1729, 0, -34.9865, 0, 0, 0, 0, 0, 0, -71.0256, 0, -29.8757, 0, 0, 0, 0, 0, 0, -65.4976, 0, -27.0596, 0, 0, 0, 0, 0, 0, -59.5525, 0, -29.0413, 0, 0, 0, 0, 0, 0, -56.0168, 7.62939e-06, -29.781),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 13
 
 [sub_resource type="Curve3D" id="Curve3D_ercsu"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -77.7381, 0, 13.9269, 0, 0, 0, 0, 0, 0, -77.1705, 0, 6.54806, 0, 0, 0, 0, 0, 0, -79.299, 0, -1.96598, 0, 0, 0, 0, 0, 0, -75.7515, 0, -8.06771, 0, 0, 0, 0, 0, 0, -67.8051, 0, -9.91242, 0, 0, 0, 0, 0, 0, -60.0005, 0, -10.9057, 0, 0, 0, 0, 0, 0, -55.1759, 0, -15.3046, 0, 0, 0, 0, 0, 0, -55.8854, 0, -22.3997, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -82.9391, 7.62939e-06, 18.2428, 0, 0, 0, 0, 0, 0, -77.7381, 0, 13.9269, 0, 0, 0, 0, 0, 0, -77.1705, 0, 6.54806, 0, 0, 0, 0, 0, 0, -79.299, 0, -1.96598, 0, 0, 0, 0, 0, 0, -75.7515, 0, -8.06771, 0, 0, 0, 0, 0, 0, -67.8051, 0, -9.91242, 0, 0, 0, 0, 0, 0, -60.0005, 0, -10.9057, 0, 0, 0, 0, 0, 0, -55.1759, 0, -15.3046, 0, 0, 0, 0, 0, 0, -55.8854, 0, -22.3997, 0, 0, 0, 0, 0, 0, -56.0168, 7.62939e-06, -29.781),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 10
 
 [sub_resource type="Curve3D" id="Curve3D_j3csf"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -25.9965, -0.00012207, -44.7192, 0, 0, 0, 0, 0, 0, -32.382, -0.00012207, -46.422, 0, 0, 0, 0, 0, 0, -38.4838, -0.00012207, -45.003, 0, 0, 0, 0, 0, 0, -43.1665, -0.00012207, -41.3135, 0, 0, 0, 0, 0, 0, -44.7274, -0.00012207, -36.7727, 0, 0, 0, 0, 0, 0, -49.2682, -0.00012207, -32.09, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -19.5721, 7.62939e-06, -44.1349, 0, 0, 0, 0, 0, 0, -25.9965, -0.00012207, -44.7192, 0, 0, 0, 0, 0, 0, -32.382, -0.00012207, -46.422, 0, 0, 0, 0, 0, 0, -38.4838, -0.00012207, -45.003, 0, 0, 0, 0, 0, 0, -43.1665, -0.00012207, -41.3135, 0, 0, 0, 0, 0, 0, -44.7274, -0.00012207, -36.7727, 0, 0, 0, 0, 0, 0, -49.2682, -0.00012207, -32.09, 0, 0, 0, 0, 0, 0, -56.0168, 7.62939e-06, -29.781),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 8
 
 [sub_resource type="Curve3D" id="Curve3D_dabdc"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -8.96593, 0, -45.4303, 0, 0, 0, 0, 0, 0, 0.825211, 0, -43.5856, 0, 0, 0, 0, 0, 0, 5.50793, 0, -38.3353, 0, 0, 0, 0, 0, 0, 3.09563, 0, -30.8145, 0, 0, 0, 0, 0, 0, -5.13461, 0, -24.8547, 0, 0, 0, 0, 0, 0, -12.9391, 0, -18.0435, 0, 0, 0, 0, 0, 0, -8.82404, 0, -11.7999, 0, 0, 0, 0, 0, 0, -5.5603, 0, -8.53615, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -19.5721, 7.62939e-06, -44.1349, 0, 0, 0, 0, 0, 0, -8.96593, 0, -45.4303, 0, 0, 0, 0, 0, 0, 0.825211, 0, -43.5856, 0, 0, 0, 0, 0, 0, 5.50793, 0, -38.3353, 0, 0, 0, 0, 0, 0, 3.09563, 0, -30.8145, 0, 0, 0, 0, 0, 0, -5.13461, 0, -24.8547, 0, 0, 0, 0, 0, 0, -12.9391, 0, -18.0435, 0, 0, 0, 0, 0, 0, -8.82404, 0, -11.7999, 0, 0, 0, 0, 0, 0, -5.5603, 0, -8.53615, 0, 0, 0, 0, 0, 0, -7.8792, 0, -0.103804),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 10
 
 [sub_resource type="Curve3D" id="Curve3D_cf55d"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -75.2913, 0, 17.5465, 0, 0, 0, 0, 0, 0, -70.0677, 0, 20.6144, 0, 0, 0, 0, 0, 0, -65.4245, 0, 23.848, 0, 0, 0, 0, 0, 0, -59.3717, 0, 22.4385, 0, 0, 0, 0, 0, 0, -52.4069, 0, 19.7852, 0, 0, 0, 0, 0, 0, -46.6029, 0, 20.6973, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -82.9391, 7.62939e-06, 18.2428, 0, 0, 0, 0, 0, 0, -75.2913, 0, 17.5465, 0, 0, 0, 0, 0, 0, -70.0677, 0, 20.6144, 0, 0, 0, 0, 0, 0, -65.4245, 0, 23.848, 0, 0, 0, 0, 0, 0, -59.3717, 0, 22.4385, 0, 0, 0, 0, 0, 0, -52.4069, 0, 19.7852, 0, 0, 0, 0, 0, 0, -46.6029, 0, 20.6973, 0, 0, 0, 0, 0, 0, -42.4174, 0, 21.7978),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 8
 
 [node name="Forest" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bgcxa")
 
 [node name="Audio" type="Node" parent="."]
 script = ExtResource("1_cf55d")
@@ -116,9 +121,6 @@ script = ExtResource("1_cf55d")
 stream = ExtResource("1_j3csf")
 volume_db = -10.0
 autoplay = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bgcxa")
 
 [node name="Scenery" type="Node" parent="."]
 
@@ -287,21 +289,12 @@ projection = 1
 size = 100.0
 script = ExtResource("8_0nboi")
 
-[node name="Label" type="Label" parent="Debug"]
-offset_left = 947.0
-offset_top = 12.0
-offset_right = 1267.0
-offset_bottom = 42.0
-text = "Press [Enter] to navigate to new location!"
-autowrap_mode = 2
-
 [node name="Vibration" type="Node" parent="."]
 script = ExtResource("10_ercsu")
 Profile = ExtResource("11_j3csf")
 metadata/_custom_type_script = "uid://0cprjmcr3bqp"
 
 [node name="UserInterface" type="CanvasLayer" parent="." node_paths=PackedStringArray("VoiceOverPlayer")]
-layer = 2
 script = ExtResource("13_dabdc")
 VoiceOverPlayer = NodePath("VoiceOverPlayer")
 VoiceOverDirectory = "res://sounds/VoiceOver"
@@ -309,6 +302,36 @@ StartMenu = "MenuMain"
 
 [node name="VoiceOverPlayer" type="AudioStreamPlayer" parent="UserInterface"]
 volume_db = -10.0
+
+[node name="Blindfold" type="TextureRect" parent="UserInterface"]
+z_index = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.5
+offset_top = -2.0
+offset_right = 13.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_i1j6r")
+script = ExtResource("18_3akcx")
+
+[node name="Label" type="Label" parent="UserInterface/Blindfold"]
+modulate = Color(1, 1, 1, 0.337255)
+offset_left = 34.0
+offset_top = 18.0
+offset_right = 689.0
+offset_bottom = 145.0
+text = "B/Triangle: Show/hide blindfold
+Esc/Options(tiny): Toggle Audio Menu
+Shift/Circle: Toggle debug sprint
+LMB/Right shoulder button: Draw/release arrow (only when drums are playing)
+C: Toggle bird-eye camera
+
+For PS4 controller vibration, you need DS4Windows Xbox controller emulator.
+Other controllers might also need emulators."
+autowrap_mode = 2
 
 [node name="MenuMain" type="Control" parent="UserInterface"]
 layout_mode = 3

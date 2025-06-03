@@ -73,7 +73,7 @@ public partial class UserInterface : Node
 		Node root = menuName == "" ? null : GetNode(menuName);
 		foreach (Node child in GetChildren())
 		{
-			if (child is Control control) control.Hide();
+			if (child is Control control && child.Name.ToString().StartsWith("Menu")) control.Hide();
 		}
 
 		Control PrevMenu = ActiveMenu;

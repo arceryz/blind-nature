@@ -7,7 +7,6 @@
 [sub_resource type="SphereMesh" id="SphereMesh_efs1a"]
 
 [node name="River" type="Path3D" node_paths=PackedStringArray("RiverSfx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_3pwp8")
 RiverSfx = NodePath("WaterNearSfx")
 
