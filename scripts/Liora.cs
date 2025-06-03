@@ -10,6 +10,7 @@ public partial class Liora : CharacterBody3D
 	[ExportGroup("SFX")]
 	[Export] AudioStreamPlayer TargetHitSfx;
 	[Export] AudioStreamPlayer3D StepSFX;
+	[Export] AudioStreamPlayer3D StepWaterSfx;
 	[Export] float StepSize = 0.5f;
 	[Export] float StepFalloffTime = 1.0f;
 	public float StepAccumulator = 0.0f;
@@ -67,6 +68,16 @@ public partial class Liora : CharacterBody3D
 		Kestrel.Instance.NavigateTo(ArcheryLocations[CurrentLocation].GlobalPosition);
 		TargetHitSfx.Play();
 		Bow.StopTargeting();
+	}
+
+	public void _OnRiverEntered()
+	{
+		Debug.Log(Debug.That.Liora, "River entered");
+	}
+
+	public void _OnRiverExited()
+	{
+		Debug.Log(Debug.That.Liora, "River exited");
 	}
 
 	public void _OnKestrelNavigationFinished()
@@ -160,7 +171,8 @@ public partial class Liora : CharacterBody3D
 
 		if (StepAccumulator > StepSize)
 		{
-			StepSFX.Play();
+			if (River.Instance.IsPlayerOnWater()) StepWaterSfx.Play();
+			else StepSFX.Play();
 			Vibration.Instance.PlayStep(1.0f);
 			StepAccumulator = 0.0f;
 		}

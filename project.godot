@@ -21,7 +21,8 @@ flags/forest_network=false
 flags/kestrel=false
 flags/vibration=false
 flags/liora_bow=false
-flags/interface=true
+flags/interface=false
+flags/liora=true
 
 [display]
 

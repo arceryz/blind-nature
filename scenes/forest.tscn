@@ -1,15 +1,17 @@
-[gd_scene load_steps=31 format=3 uid="uid://rop4mdjkcm0p"]
+[gd_scene load_steps=33 format=3 uid="uid://rop4mdjkcm0p"]
 
 [ext_resource type="Material" uid="uid://drxc4hg7i4uuw" path="res://assets/materials/mat_green.tres" id="1_bgcxa"]
 [ext_resource type="Script" uid="uid://bxkujq5ovtx85" path="res://scripts/AudioController.cs" id="1_cf55d"]
 [ext_resource type="AudioStream" uid="uid://csivw3rx3cxbu" path="res://sounds/Placeholder/northern_forest.mp3" id="1_j3csf"]
 [ext_resource type="PackedScene" uid="uid://c16bn1jtiqhig" path="res://prefabs/liora.tscn" id="1_xijx7"]
-[ext_resource type="PackedScene" uid="uid://bjyarlckxl1wq" path="res://prefabs/structures/hut1.tscn" id="2_0afsd"]
+[ext_resource type="PackedScene" uid="uid://bjyarlckxl1wq" path="res://prefabs/scenery/hut1.tscn" id="2_0afsd"]
 [ext_resource type="PackedScene" uid="uid://bo6c002tkqq2v" path="res://prefabs/entities/kestrel.tscn" id="4_i1yi8"]
 [ext_resource type="Script" uid="uid://ccyyya05un15d" path="res://scripts/ForestNetwork.cs" id="4_sek5r"]
 [ext_resource type="PackedScene" uid="uid://j836iymgxktk" path="res://prefabs/junction.tscn" id="4_yj5dr"]
+[ext_resource type="PackedScene" uid="uid://b5ael5ae5om1h" path="res://prefabs/scenery/river.tscn" id="5_di0nb"]
 [ext_resource type="PackedScene" uid="uid://dl80dmjraoqp6" path="res://prefabs/entities/practice_target.tscn" id="5_j3csf"]
 [ext_resource type="Script" uid="uid://30yifuwdlap4" path="res://scripts/GuidePath.cs" id="5_xr56k"]
+[ext_resource type="Curve3D" uid="uid://uj77o3tna0h" path="res://settings/river_curve.tres" id="6_pyn53"]
 [ext_resource type="Script" uid="uid://bfs0pqimefcl3" path="res://scripts/CameraToggle.cs" id="8_0nboi"]
 [ext_resource type="Script" uid="uid://0cprjmcr3bqp" path="res://scripts/Vibration.cs" id="10_ercsu"]
 [ext_resource type="Resource" uid="uid://oiesuicvajyt" path="res://settings/vibration_profile.tres" id="11_j3csf"]
@@ -118,21 +120,26 @@ autoplay = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bgcxa")
 
-[node name="Obstacles" type="Node" parent="."]
+[node name="Scenery" type="Node" parent="."]
 
-[node name="WorldFloor" type="StaticBody3D" parent="Obstacles"]
+[node name="WorldFloor" type="StaticBody3D" parent="Scenery"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/WorldFloor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/WorldFloor"]
 transform = Transform3D(25.5957, 0, 0, 0, 25.5957, 0, 0, 0, 25.5957, 0, -0.0709648, 0)
 shape = SubResource("WorldBoundaryShape3D_3y7o3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacles/WorldFloor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenery/WorldFloor"]
 transform = Transform3D(454.588, 0, 0, 0, 0.999999, 0, 0, 0, 476.993, 0, 0, 0)
 material_override = ExtResource("1_bgcxa")
 mesh = SubResource("PlaneMesh_0afsd")
 
-[node name="Hut" parent="Obstacles" instance=ExtResource("2_0afsd")]
+[node name="Hut" parent="Scenery" instance=ExtResource("2_0afsd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251962, 0)
+
+[node name="River" parent="Scenery" instance=ExtResource("5_di0nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+curve = ExtResource("6_pyn53")
+RiverWidth = 4.0
 
 [node name="Entities" type="Node" parent="."]
 

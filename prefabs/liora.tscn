@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c16bn1jtiqhig"]
+[gd_scene load_steps=19 format=3 uid="uid://c16bn1jtiqhig"]
 
 [ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://scripts/Liora.cs" id="1_72ieh"]
 [ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://assets/materials/mat_blue.tres" id="2_4dohe"]
@@ -10,6 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://cp7nu5ssyrycc" path="res://sounds/Placeholder/bow_draw.wav" id="5_esfq6"]
 [ext_resource type="AudioStream" uid="uid://ch0eqpv7l037r" path="res://sounds/Placeholder/target_beat.wav" id="6_stlqu"]
 [ext_resource type="AudioStream" uid="uid://ctnxc4hmm0wc1" path="res://sounds/Placeholder/reward.wav" id="9_oveln"]
+[ext_resource type="AudioStream" uid="uid://de5l2qyoc67ev" path="res://sounds/Placeholder/footstep_water1.wav" id="10_av7t8"]
+[ext_resource type="AudioStream" uid="uid://i5gkxcgxayhi" path="res://sounds/Placeholder/footstep_water2.wav" id="11_k3p66"]
+[ext_resource type="AudioStream" uid="uid://c6mn7iolaqhob" path="res://sounds/Placeholder/footstep_water3.wav" id="12_jryfe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
 
@@ -22,11 +25,25 @@ stream_0/volume = -3.0
 stream_1/stream = ExtResource("3_1txc5")
 stream_1/volume = 0.0
 
-[node name="Liora" type="CharacterBody3D" node_paths=PackedStringArray("TargetHitSfx", "StepSFX", "ArcheryLocations")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7f253"]
+streams_count = 3
+stream_0/stream = ExtResource("10_av7t8")
+stream_1/stream = ExtResource("11_k3p66")
+stream_2/stream = ExtResource("12_jryfe")
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_8lwxk"]
+stream_count = 2
+stream_0/stream = SubResource("AudioStreamRandomizer_7f253")
+stream_0/volume = -10.0
+stream_1/stream = ExtResource("3_1txc5")
+stream_1/volume = 0.0
+
+[node name="Liora" type="CharacterBody3D" node_paths=PackedStringArray("TargetHitSfx", "StepSFX", "StepWaterSfx", "ArcheryLocations")]
 collision_layer = 2
 script = ExtResource("1_72ieh")
 TargetHitSfx = NodePath("TargetHitSfx")
 StepSFX = NodePath("StepSFX_Layers")
+StepWaterSfx = NodePath("StepSFX_LayersWater")
 StepSize = 3.0
 ArcheryLocations = []
 
@@ -71,6 +88,9 @@ surface_material_override/0 = ExtResource("2_4dohe")
 
 [node name="StepSFX_Layers" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamSynchronized_g2jcq")
+
+[node name="StepSFX_LayersWater" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamSynchronized_8lwxk")
 
 [node name="TargetHitSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_oveln")

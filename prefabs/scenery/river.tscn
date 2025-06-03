@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5ael5ae5om1h"]
+
+[ext_resource type="Script" uid="uid://dcb6wexiw14y1" path="res://scripts/River.cs" id="1_3pwp8"]
+[ext_resource type="AudioStream" uid="uid://bdwqp3i0w8fir" path="res://sounds/Placeholder/water_stream_near.mp3" id="3_7hsks"]
+[ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://assets/materials/mat_blue.tres" id="3_nkqaa"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_efs1a"]
+
+[node name="River" type="Path3D" node_paths=PackedStringArray("RiverSfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_3pwp8")
+RiverSfx = NodePath("WaterNearSfx")
+
+[node name="WaterNearSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_7hsks")
+volume_db = -30.0
+unit_size = 20.0
+autoplay = true
+bus = &"SFX"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WaterNearSfx"]
+mesh = SubResource("SphereMesh_efs1a")
+surface_material_override/0 = ExtResource("3_nkqaa")

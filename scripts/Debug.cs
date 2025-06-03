@@ -10,6 +10,7 @@ public partial class Debug
 		ForestNetwork,
 		Kestrel,
 		Vibration,
+		Liora,
 		LioraBow,
 		Interface
 	};
@@ -21,6 +22,7 @@ public partial class Debug
 		Settings[That.ForestNetwork] = ProjectSettings.GetSetting("debug/flags/forest_network").AsBool();
 		Settings[That.Kestrel] = ProjectSettings.GetSetting("debug/flags/kestrel").AsBool();
 		Settings[That.Vibration] = ProjectSettings.GetSetting("debug/flags/vibration").AsBool();
+		Settings[That.Liora] = ProjectSettings.GetSetting("debug/flags/liora").AsBool();
 		Settings[That.LioraBow] = ProjectSettings.GetSetting("debug/flags/liora_bow").AsBool();
 		Settings[That.Interface] = ProjectSettings.GetSetting("debug/flags/interface").AsBool();
 		IsReady = true;
