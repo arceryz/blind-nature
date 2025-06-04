@@ -308,10 +308,6 @@ z_index = 4
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -13.5
-offset_top = -2.0
-offset_right = 13.5
-offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_i1j6r")
@@ -319,6 +315,7 @@ script = ExtResource("18_3akcx")
 
 [node name="Label" type="Label" parent="UserInterface/Blindfold"]
 modulate = Color(1, 1, 1, 0.337255)
+layout_mode = 0
 offset_left = 34.0
 offset_top = 18.0
 offset_right = 689.0
