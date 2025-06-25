@@ -7,14 +7,13 @@ public partial class Liora : CharacterBody3D
 {
 	public static Liora Instance;
 
-	[ExportGroup("SFX")]
-	[Export] AudioStreamPlayer TargetHitSfx;
-	[Export] AudioStreamPlayer3D StepSFX;
-	[Export] AudioStreamPlayer3D StepWaterSfx;
+	[Signal] public delegate void FootstepEventHandler();
+	[Signal] public delegate void TurnBodyEventHandler(float delta);
+
+	[ExportGroup("Steps")]
 	[Export] float StepSize = 0.5f;
 	[Export] float StepFalloffTime = 1.0f;
 	public float StepAccumulator = 0.0f;
-
 
 	[ExportGroup("Movement")]
 	[Export] float MouseLookH = 1.0f;
@@ -66,7 +65,6 @@ public partial class Liora : CharacterBody3D
 	{
 		CurrentLocation = (CurrentLocation + 1) % ArcheryLocations.Count;
 		Kestrel.Instance.NavigateTo(ArcheryLocations[CurrentLocation].GlobalPosition);
-		TargetHitSfx.Play();
 		Bow.StopTargeting();
 	}
 
@@ -135,7 +133,7 @@ public partial class Liora : CharacterBody3D
 			Vector2 direction = new Vector2(Direction.X, Direction.Z).Normalized();
 			Vector3 target3 = Kestrel.Instance.GlobalPosition - GlobalPosition;
 			Vector2 target = new Vector2(target3.X, target3.Z);
-			Vibration.Instance.PlayDirectionalFeedback(direction, target, Kestrel.Instance.GetVibrationFeedbackRadius());
+			Haptics.Instance.PlayDirectionalFeedback(direction, target, Kestrel.Instance.GetVibrationFeedbackRadius());
 		}
 	}
 
@@ -149,7 +147,9 @@ public partial class Liora : CharacterBody3D
 
 		// Rotation with controller.
 		float axis = Input.GetAxis("turn_left", "turn_right");
-		Rotation = Rotation with { Y = Rotation.Y - axis * ControllerTurnSpeed * delta * AimSpeed };
+		float rotDelta = axis * ControllerTurnSpeed * delta * AimSpeed;
+		Rotation = Rotation with { Y = Rotation.Y - rotDelta };
+		EmitSignal(SignalName.TurnBody, Mathf.RadToDeg(rotDelta));
 
 		// Set velocity vector.
 		float speed = baseSpeed * (Input.IsActionPressed("debug_sprint") ? 5.0f : 1.0f);
@@ -171,9 +171,7 @@ public partial class Liora : CharacterBody3D
 
 		if (StepAccumulator > StepSize)
 		{
-			if (River.Instance.IsPlayerOnWater()) StepWaterSfx.Play();
-			else StepSFX.Play();
-			Vibration.Instance.PlayStep(1.0f);
+			EmitSignal(SignalName.Footstep);
 			StepAccumulator = 0.0f;
 		}
 

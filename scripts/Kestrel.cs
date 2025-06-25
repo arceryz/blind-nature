@@ -8,12 +8,10 @@ public partial class Kestrel : Node3D
 {
 	public static Kestrel Instance;
 
-	[Signal]
-	public delegate void NavigationFinishedEventHandler();
-
-	[ExportGroup("SFX")]
-	[Export] AudioStreamPlayer3D CallingSFX;
-	[Export] AudioStreamPlayer3D FlappingSFX;
+	[Signal] public delegate void NavigationFinishedEventHandler();
+	[Signal] public delegate void CallEventHandler();
+	[Signal] public delegate void FlappingStartedEventHandler();
+	[Signal] public delegate void FlappingEndedEventHandler();
 
 	[ExportGroup("Navigation")]
 	[Export] float CallingInterval = 1.0f;
@@ -84,7 +82,7 @@ public partial class Kestrel : Node3D
 				{
 					CallingTimer = 0.0f;
 					CallingTimerDuration = CallingInterval + GD.Randf() * CallingIntervalRandom;
-					CallingSFX.Play();
+					EmitSignal(SignalName.Call);
 
 					if (PlayerPathDistance > CallingDistanceMax)
 					{
@@ -112,12 +110,12 @@ public partial class Kestrel : Node3D
 	void _OnRelocatingEnd()
 	{
 		CurrentState = State.Calling;
-		FlappingSFX.Stop();
+		EmitSignal(SignalName.FlappingEnded);
 	}
 
 	void _OnRelocatingStart()
 	{
-		FlappingSFX.Play();
+		EmitSignal(SignalName.FlappingStarted);
 	}
 
 	public void RelocateToGuidingPosition()

@@ -18,6 +18,7 @@ config/icon="uid://2b4nyla8ovbj"
 [autoload]
 
 WwiseRuntimeManager="*res://addons/Wwise/runtime/wwise_runtime_manager.gd"
+Haptics="*res://addons/Haptics/Haptics.cs"
 
 [debug]
 
@@ -26,7 +27,7 @@ flags/kestrel=false
 flags/vibration=false
 flags/liora_bow=false
 flags/interface=false
-flags/liora=true
+flags/liora=false
 
 [display]
 
@@ -37,6 +38,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="Blind Nature"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Haptics/plugin.cfg")
 
 [file_customization]
 
@@ -51,6 +56,10 @@ folder_colors={
 [global]
 
 interface=false
+
+[haptics]
+
+setup/profile="res://addons/Haptics/haptics_profile.tres"
 
 [input]
 

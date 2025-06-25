@@ -1,17 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo6c002tkqq2v"]
+[gd_scene load_steps=7 format=3 uid="uid://bo6c002tkqq2v"]
 
 [ext_resource type="Script" uid="uid://b23iymm3wa31v" path="res://scripts/Kestrel.cs" id="1_10gug"]
 [ext_resource type="Material" uid="uid://dt5d8n4coike3" path="res://assets/materials/mat_red.tres" id="2_kfsae"]
 [ext_resource type="AudioStream" uid="uid://d3gym53y8qs6u" path="res://sounds/kestrel_calling_sfx_stream.tres" id="3_e2ku0"]
 [ext_resource type="AudioStream" uid="uid://d1n2qfb6uwovo" path="res://sounds/kestrel_flapping_sfx_stream.tres" id="4_qyt3d"]
+[ext_resource type="Script" uid="uid://byl88lfgcovkn" path="res://scripts/RepeatSfx.cs" id="4_sndgb"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_envoc"]
 material = ExtResource("2_kfsae")
 
-[node name="Kestrel" type="Node3D" node_paths=PackedStringArray("CallingSFX", "FlappingSFX")]
+[node name="Kestrel" type="Node3D"]
 script = ExtResource("1_10gug")
-CallingSFX = NodePath("CallingSFX")
-FlappingSFX = NodePath("FlappingSFX")
 CallingInterval = 1.5
 CallingDistanceMin = 7.0
 CallingDistanceMax = 20.0
@@ -41,3 +40,10 @@ stream = ExtResource("4_qyt3d")
 volume_db = 25.693
 max_distance = 250.0
 bus = &"SFX"
+
+[node name="RepeatSfx" type="AudioStreamPlayer3D" parent="."]
+script = ExtResource("4_sndgb")
+
+[connection signal="Call" from="." to="CallingSFX" method="play"]
+[connection signal="FlappingEnded" from="." to="FlappingSFX" method="stop"]
+[connection signal="FlappingStarted" from="." to="FlappingSFX" method="play"]

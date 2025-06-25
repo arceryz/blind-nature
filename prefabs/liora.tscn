@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c16bn1jtiqhig"]
+[gd_scene load_steps=22 format=3 uid="uid://c16bn1jtiqhig"]
 
 [ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://scripts/Liora.cs" id="1_72ieh"]
 [ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://assets/materials/mat_blue.tres" id="2_4dohe"]
@@ -11,8 +11,11 @@
 [ext_resource type="AudioStream" uid="uid://ch0eqpv7l037r" path="res://sounds/Placeholder/target_beat.wav" id="6_stlqu"]
 [ext_resource type="AudioStream" uid="uid://ctnxc4hmm0wc1" path="res://sounds/Placeholder/reward.wav" id="9_oveln"]
 [ext_resource type="AudioStream" uid="uid://de5l2qyoc67ev" path="res://sounds/Placeholder/footstep_water1.wav" id="10_av7t8"]
+[ext_resource type="Script" uid="uid://cx5m7xx3mm4ki" path="res://scripts/FloorSfx.cs" id="11_7f253"]
 [ext_resource type="AudioStream" uid="uid://i5gkxcgxayhi" path="res://sounds/Placeholder/footstep_water2.wav" id="11_k3p66"]
 [ext_resource type="AudioStream" uid="uid://c6mn7iolaqhob" path="res://sounds/Placeholder/footstep_water3.wav" id="12_jryfe"]
+[ext_resource type="Script" uid="uid://cku2yvsqmelin" path="res://addons/Haptics/Haptics3D.cs" id="14_k3p66"]
+[ext_resource type="Script" uid="uid://be5yua68xhl4s" path="res://scripts/FloorDetector.cs" id="15_jryfe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
 
@@ -38,12 +41,9 @@ stream_0/volume = -10.0
 stream_1/stream = ExtResource("3_1txc5")
 stream_1/volume = 0.0
 
-[node name="Liora" type="CharacterBody3D" node_paths=PackedStringArray("TargetHitSfx", "StepSFX", "StepWaterSfx", "ArcheryLocations")]
+[node name="Liora" type="CharacterBody3D" node_paths=PackedStringArray("ArcheryLocations")]
 collision_layer = 2
 script = ExtResource("1_72ieh")
-TargetHitSfx = NodePath("TargetHitSfx")
-StepSFX = NodePath("StepSFX_Layers")
-StepWaterSfx = NodePath("StepSFX_LayersWater")
 StepSize = 3.0
 ArcheryLocations = []
 
@@ -70,6 +70,10 @@ Camera = NodePath("..")
 [node name="ConfirmSfx" type="AudioStreamPlayer" parent="Camera/LioraBow"]
 stream = ExtResource("3_stlqu")
 
+[node name="TargetHitSfx" type="AudioStreamPlayer" parent="Camera/LioraBow"]
+stream = ExtResource("9_oveln")
+volume_db = -20.0
+
 [node name="ArrowReleaseSfx" type="AudioStreamPlayer3D" parent="Camera/LioraBow"]
 stream = ExtResource("4_xi8dm")
 volume_db = -10.0
@@ -86,12 +90,25 @@ stream = ExtResource("6_stlqu")
 mesh = SubResource("CapsuleMesh_72ieh")
 surface_material_override/0 = ExtResource("2_4dohe")
 
-[node name="StepSFX_Layers" type="AudioStreamPlayer3D" parent="."]
+[node name="Haptics3D" type="Marker3D" parent="."]
+script = ExtResource("14_k3p66")
+metadata/_custom_type_script = "uid://cku2yvsqmelin"
+
+[node name="FloorDetector" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.92, 0)
+script = ExtResource("15_jryfe")
+
+[node name="FloorSFX" type="Node3D" parent="." node_paths=PackedStringArray("FloorDetector")]
+script = ExtResource("11_7f253")
+FloorDetector = NodePath("../FloorDetector")
+
+[node name="Ground" type="AudioStreamPlayer3D" parent="FloorSFX"]
 stream = SubResource("AudioStreamSynchronized_g2jcq")
 
-[node name="StepSFX_LayersWater" type="AudioStreamPlayer3D" parent="."]
+[node name="Puddle" type="AudioStreamPlayer3D" parent="FloorSFX"]
 stream = SubResource("AudioStreamSynchronized_8lwxk")
 
-[node name="TargetHitSfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_oveln")
-volume_db = -20.0
+[connection signal="Footstep" from="." to="FloorSFX" method="Play"]
+[connection signal="Footstep" from="." to="Haptics3D" method="PlayStep" binds= [1.0]]
+[connection signal="TurnBody" from="." to="Haptics3D" method="PlayRotationFeedback"]
+[connection signal="ArrowHit" from="Camera/LioraBow" to="Camera/LioraBow/TargetHitSfx" method="play" unbinds=1]

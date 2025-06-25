@@ -120,7 +120,7 @@ public partial class LioraBow : Node3D
 			AimVision.QueueRedraw();
 			if (TargetVisible)
 			{
-				Vibration.Instance.PlayDirectionalFeedback(AimDirection, TargetScreenCentered, TargetScreenRadius);
+				Haptics.Instance.PlayDirectionalFeedback(AimDirection, TargetScreenCentered, TargetScreenRadius);
 			}
 			else
 			{

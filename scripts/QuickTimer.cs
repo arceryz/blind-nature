@@ -11,10 +11,10 @@ public partial class QuickTimer : Node
 	bool Active = false;
 	bool Oneshot = false;
 	bool CallDirect = false;
-	float Time = 0.0f;
-	float Duration = 0.0f;
+	public float Time = 0.0f;
+	public float Duration = 0.0f;
 
-	public QuickTimer(Node bind, Action callback, float baseDur, float randomDur, bool oneshot, bool callDirect)
+	public QuickTimer(Node bind, Action callback, float baseDur, float randomDur=0, bool oneshot=true, bool callDirect=false)
 	{
 		bind.AddChild(this);
 		Timeout += callback;
@@ -46,7 +46,7 @@ public partial class QuickTimer : Node
 	{
 		Active = true;
 		Reset();
-		if (CallDirect) Timeout?.Invoke();
+		if (CallDirect && !Oneshot) Timeout?.Invoke();
 	}
 
 	public void Stop()
