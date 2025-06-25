@@ -2,14 +2,23 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Data.Common;
+using System.Security.Cryptography;
 
 // The globally accessible class for managing vibration.
 // PS4 controllers require DS4Windows currently.
-[GlobalClass]
-public partial class Vibration : Node
+
+
+public interface IHaptics
 {
-	public static Vibration Instance;
-	[Export] VibrationProfile Profile;
+	void PlayDirectionalFeedback(Vector2 direction, Vector2 target, float targetRadius);
+	void PlayStep(float strength);
+	public void PlayRotationFeedback(float delta);
+}
+
+public partial class Haptics : Node, IHaptics
+{
+	public static Haptics Instance;
+	public HapticsProfile Profile;
 	int Device = 0;
 
 	float PulseTimer = 0.0f;
@@ -19,15 +28,27 @@ public partial class Vibration : Node
 	float PulseStrong = 0.0f;
 	float PulseLock = 0.0f;
 
+	float RotationSign = 1.0f;
+	int RotationAccumulator = 0;
+	float RotationTickAccumulator = 0.0f;
+	float RotationSpeed = 0.0f;
+	public QuickTimer RotationFeedbackResetTimer;
+
 	public override void _EnterTree()
 	{
 		Instance = this;
-		Profile = GD.Load<VibrationProfile>("res://settings/vibration_profile.tres");
+		Profile = GD.Load<HapticsProfile>(ProjectSettings.GetSetting(HapticsPlugin.ProfileSetting).ToString());
 	}
 
 	public override void _Ready()
 	{
 		FindDevice();
+		RotationFeedbackResetTimer = new QuickTimer(this, () =>
+		{
+			RotationAccumulator = 0;
+			RotationTickAccumulator = 0.0f;
+			Debug.Log(Debug.That.Vibration, String.Format("Rotation feedback: sign={0}, acc={1}, tick={2}", RotationSign, RotationAccumulator, RotationTickAccumulator));
+		}, Profile.RfResetTime);
 	}
 
 	public override void _Process(double delta)
@@ -73,7 +94,7 @@ public partial class Vibration : Node
 		}
 	}
 
-	void PlayRaw(float weak, float strong, float duration)
+	public void PlayRaw(float weak, float strong, float duration)
 	{
 		Input.StartJoyVibration(Device, weak, strong, duration);
 	}
@@ -106,9 +127,40 @@ public partial class Vibration : Node
 	/// <param name="strength"> The strength of this step from 0 to 1. </param>
 	public void PlayStep(float strength)
 	{
-		float weak = Profile.StepWeak;
-		float strong = Profile.StepStrong;
-		PulseLock = Profile.StepPulseDuration;
-		PlayRaw(weak, strong, Profile.StepPulseDuration);
+		float weak = Profile.StepPulse.X;
+		float strong = Profile.StepPulse.Y;
+		PulseLock = Profile.StepPulse.Z;
+		PlayRaw(weak, strong, Profile.StepPulse.Z);
+	}
+
+	public void PlayRotationFeedback(float delta)
+	{
+		float newSign = Mathf.Sign(delta);
+		if (newSign != 0)
+		{
+			if (newSign != RotationSign)
+			{
+				// Reset the accumulator if the sign has changed.
+				RotationAccumulator = 0;
+				RotationTickAccumulator = 0.0f;
+			}
+			RotationSign = newSign;
+			RotationFeedbackResetTimer.Start();
+			RotationSpeed = Mathf.Abs(delta) / (float)GetPhysicsProcessDeltaTime();
+		}
+
+		RotationTickAccumulator += Mathf.Abs(delta);
+
+		if (RotationTickAccumulator > 30.0f)
+		{
+			RotationTickAccumulator -= 30.0f;
+			RotationAccumulator += 30;
+
+			Vector3 pulse = Profile.RfPulse30;
+			if (RotationAccumulator % 90 == 0) pulse = Profile.RfPulse90;
+			if (pulse.Z > 0) PlayRaw(pulse.X, pulse.Y, pulse.Z);
+		}
+
+		Debug.Log(Debug.That.Vibration, String.Format("Rotation feedback: sign={0}, acc={1}, tick={2}, speed={3}", RotationSign, RotationAccumulator, RotationTickAccumulator, RotationSpeed));
 	}
 }

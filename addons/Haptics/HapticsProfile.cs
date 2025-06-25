@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class VibrationProfile : Resource
+public partial class HapticsProfile : Resource
 {
 	[ExportGroup("Directional Feedback")]
 	[Export(PropertyHint.Range, "0, 1")] public float DfStrength;
@@ -10,7 +10,10 @@ public partial class VibrationProfile : Resource
 	[Export(PropertyHint.Range, "0, 1")] public float DfPulseDuration;
 
 	[ExportGroup("Steps")]
-	[Export(PropertyHint.Range, "0, 1")] public float StepStrong;
-	[Export(PropertyHint.Range, "0, 1")] public float StepWeak;
-	[Export(PropertyHint.Range, "0, 1")] public float StepPulseDuration;
+	[Export] public Vector3 StepPulse;
+
+	[ExportGroup("Rotation Feedback")]
+	[Export] public Vector3 RfPulse90;
+	[Export] public Vector3 RfPulse30;
+	[Export] public float RfResetTime = 0.5f;
 }
