@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5ael5ae5om1h"]
+
+[ext_resource type="Script" uid="uid://dcb6wexiw14y1" path="res://Scripts/Dumpster/River.cs" id="1_dyx78"]
+[ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://Assets/Materials/mat_blue.tres" id="2_27hjj"]
+[ext_resource type="WwiseEvent" uid="uid://c22y7ve13rodh" path="res://Wwise/resources/Event/{E47AAC57-807B-4C8B-B6DB-C34CE8509529}.tres" id="2_42pgq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_efs1a"]
+
+[node name="River" type="Path3D" node_paths=PackedStringArray("RiverSfx")]
+script = ExtResource("1_dyx78")
+RiverSfx = NodePath("WaterStreamSfx")
+
+[node name="WaterStreamSfx" type="AkEvent3D" parent="."]
+event = ExtResource("2_42pgq")
+trigger_on = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WaterStreamSfx"]
+mesh = SubResource("SphereMesh_efs1a")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_27hjj")

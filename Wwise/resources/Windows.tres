@@ -1,0 +1,5 @@
+[gd_resource type="WwisePlatformInfo" format=3 uid="uid://crspkbdkmawut"]
+
+[resource]
+platform_name = "Windows"
+platform_path = "../../../Wwise/BlindNature/GeneratedSoundBanks/Windows"

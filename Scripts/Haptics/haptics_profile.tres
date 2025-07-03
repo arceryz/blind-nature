@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HapticsProfile" load_steps=2 format=3 uid="uid://oiesuicvajyt"]
+
+[ext_resource type="Script" uid="uid://cppwbne3mfeeq" path="res://Scripts/Haptics/HapticsProfile.cs" id="1_xaxoa"]
+
+[resource]
+script = ExtResource("1_xaxoa")
+DfStrength = 0.3
+DfIntervalFastest = 0.1
+DfIntervalSlowest = 1.0
+DfPulseDuration = 0.07
+StepPulse = Vector3(0, 0, 0)
+RfPulse90 = Vector3(1, 1, 0.2)
+RfPulse30 = Vector3(1, 0.2, 0.1)
+RfResetTime = 5.0

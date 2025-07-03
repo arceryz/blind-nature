@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dx80628j6atwu"]
+
+[ext_resource type="Shader" uid="uid://csuc5rahwtw5" path="res://Assets/Materials/color_fill.gdshader" id="1_gps4g"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gps4g")
+shader_parameter/color = Color(0.924133, 0.663925, 0, 1)
+shader_parameter/checkerEnabled = false

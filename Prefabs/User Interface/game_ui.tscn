@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://3irqqpb0udlh"]
+
+[ext_resource type="Script" uid="uid://d0sflnqk5agwi" path="res://Scripts/User Interface/GameUI.cs" id="1_lrq42"]
+[ext_resource type="Script" uid="uid://d25a0st464gnv" path="res://Scripts/Audio/Voiceover.cs" id="2_c26k5"]
+[ext_resource type="Script" uid="uid://b7888nv8mj5jg" path="res://Scripts/User Interface/AcSlider.cs" id="5_6k2wp"]
+[ext_resource type="Script" uid="uid://jrsk8w48hrkm" path="res://Scripts/User Interface/AcMenu.cs" id="5_tjudu"]
+[ext_resource type="Script" uid="uid://koeq6fitjroa" path="res://Scripts/User Interface/AcButton.cs" id="6_scijx"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_lrq42")
+
+[node name="Voiceover" type="Node3D" parent="."]
+script = ExtResource("2_c26k5")
+IsGlobalVoice = true
+metadata/_custom_type_script = "uid://d25a0st464gnv"
+
+[node name="MenuMain" type="VBoxContainer" parent="." node_paths=PackedStringArray("FirstControl")]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -50.5
+offset_right = 60.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_tjudu")
+FirstControl = NodePath("SettingsButton")
+
+[node name="SettingsButton" type="Button" parent="MenuMain"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
+script = ExtResource("6_scijx")
+VoiceEvent = &"play_settings"
+
+[node name="ResumeButton" type="Button" parent="MenuMain"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume Game"
+script = ExtResource("6_scijx")
+VoiceEvent = &"play_resume_game"
+
+[node name="QuitButton" type="Button" parent="MenuMain"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit Game"
+script = ExtResource("6_scijx")
+VoiceEvent = &"play_quit_game"
+
+[node name="MenuSettings" type="VBoxContainer" parent="." node_paths=PackedStringArray("FirstControl")]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -68.0
+offset_right = 50.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_tjudu")
+FirstControl = NodePath("VolumeSlider")
+
+[node name="Volume" type="Label" parent="MenuSettings"]
+layout_mode = 2
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="MenuSettings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 20.0
+step = 20.0
+value = 100.0
+script = ExtResource("5_6k2wp")
+AnnounceEvent = &"play_master_volume"
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 910.0
+offset_top = 501.5
+offset_right = 1010.0
+offset_bottom = 532.5
+text = "Back"
+script = ExtResource("6_scijx")
+VoiceEvent = &"play_back"

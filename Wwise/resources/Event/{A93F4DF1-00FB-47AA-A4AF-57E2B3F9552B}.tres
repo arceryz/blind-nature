@@ -1,0 +1,8 @@
+[gd_resource type="WwiseEvent" format=3 uid="uid://74chfmsjxq84"]
+
+[resource]
+is_in_user_defined_sound_bank = true
+name = "play_bow_arrow_release"
+id = 3519417406
+guid = "{A93F4DF1-00FB-47AA-A4AF-57E2B3F9552B}"
+dummy = true

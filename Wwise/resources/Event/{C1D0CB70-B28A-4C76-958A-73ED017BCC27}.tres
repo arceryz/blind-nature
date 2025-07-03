@@ -1,0 +1,8 @@
+[gd_resource type="WwiseEvent" format=3 uid="uid://bdmmkybuw23fe"]
+
+[resource]
+is_in_user_defined_sound_bank = true
+name = "play_forest"
+id = 207755397
+guid = "{C1D0CB70-B28A-4C76-958A-73ED017BCC27}"
+dummy = true

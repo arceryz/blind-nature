@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpfej0lclpc6g"]
+
+[ext_resource type="Script" uid="uid://cuehl8jiec6pn" path="res://Scripts/Dumpster/NavDebugAgent.cs" id="1_j457n"]
+[ext_resource type="Material" uid="uid://dt5d8n4coike3" path="res://Assets/Materials/mat_red.tres" id="1_slnh3"]
+[ext_resource type="Material" uid="uid://dfppp5wqekr77" path="res://Assets/Materials/mat_cyan.tres" id="3_w3n55"]
+[ext_resource type="Material" uid="uid://t0saimsdhfxi" path="res://Assets/Materials/mat_bright_green.tres" id="4_rfiqe"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_slnh3"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_w3n55"]
+material = ExtResource("4_rfiqe")
+
+[node name="NavDebugAgent" type="Node3D"]
+script = ExtResource("1_j457n")
+Maps = Array[RID]([RID(775387625816064)])
+
+[node name="StartPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.579739, 1.19808, -1.3736)
+material_override = ExtResource("1_slnh3")
+mesh = SubResource("SphereMesh_slnh3")
+
+[node name="Label3D" type="Label3D" parent="StartPoint"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01177, 0)
+billboard = 1
+text = "3"
+font_size = 302
+
+[node name="EndPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.769104, 1.19808, 0.913266)
+material_override = ExtResource("3_w3n55")
+mesh = SubResource("SphereMesh_slnh3")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugLabel" type="Label" parent="Interface"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 94.0
+offset_bottom = 58.0
+text = "Hello"
+
+[node name="PathPoint" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_w3n55")

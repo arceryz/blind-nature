@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dl80dmjraoqp6"]
+
+[ext_resource type="Material" uid="uid://dx80628j6atwu" path="res://Assets/Materials/mat_yellow.tres" id="1_53tad"]
+[ext_resource type="Script" uid="uid://c1mrnm18ewg21" path="res://Scripts/Dumpster/AimTarget.cs" id="1_cq3p5"]
+[ext_resource type="Material" uid="uid://b5hp1dm8w4v50" path="res://Assets/Materials/mat_gray.tres" id="2_csnr5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_53tad"]
+radius = 3.2681
+
+[sub_resource type="SphereMesh" id="SphereMesh_m7snf"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_53tad"]
+top_radius = 0.245
+bottom_radius = 0.4
+height = 11.892
+
+[node name="PracticeTarget" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_cq3p5")
+
+[node name="TargetShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.75681, 0)
+shape = SubResource("SphereShape3D_53tad")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.67103, 0, 0, 0, 1.67103, 0, 0, 0, 1.67103, 0, 4.75681, 0)
+material_override = ExtResource("1_53tad")
+mesh = SubResource("SphereMesh_m7snf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.34033, 0)
+material_override = ExtResource("2_csnr5")
+mesh = SubResource("CylinderMesh_53tad")
+skeleton = NodePath("../MeshInstance3D")

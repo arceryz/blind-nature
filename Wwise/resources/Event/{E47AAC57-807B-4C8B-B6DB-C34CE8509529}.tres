@@ -1,0 +1,8 @@
+[gd_resource type="WwiseEvent" format=3 uid="uid://c22y7ve13rodh"]
+
+[resource]
+is_in_user_defined_sound_bank = true
+name = "play_water_stream_loop"
+id = 1516668143
+guid = "{E47AAC57-807B-4C8B-B6DB-C34CE8509529}"
+dummy = true

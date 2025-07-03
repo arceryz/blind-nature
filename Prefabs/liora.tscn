@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c16bn1jtiqhig"]
+
+[ext_resource type="Script" uid="uid://di6xfllk1m8ao" path="res://Scripts/Character/Liora.cs" id="1_ri5sd"]
+[ext_resource type="Script" uid="uid://c0kohqiswkmlx" path="res://Scripts/Character/LioraBow.cs" id="2_ywmak"]
+[ext_resource type="Material" uid="uid://crrpmxocwtua3" path="res://Assets/Materials/mat_blue.tres" id="6_joxfj"]
+[ext_resource type="Script" uid="uid://be5yua68xhl4s" path="res://Scripts/Audio/SurfaceDetector.cs" id="8_65c73"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp3wc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_72ieh"]
+
+[node name="Liora" type="CharacterBody3D" node_paths=PackedStringArray("surfaceDetector", "ArcheryLocations")]
+collision_layer = 2
+script = ExtResource("1_ri5sd")
+surfaceDetector = NodePath("SurfaceDetector")
+StepSize = 3.0
+ArcheryLocations = []
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_fp3wc")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.776736, 0)
+current = true
+
+[node name="LioraBow" type="Node3D" parent="Camera" node_paths=PackedStringArray("Camera")]
+unique_name_in_owner = true
+script = ExtResource("2_ywmak")
+Camera = NodePath("..")
+
+[node name="AkListener3D" type="AkListener3D" parent="Camera"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_72ieh")
+surface_material_override/0 = ExtResource("6_joxfj")
+
+[node name="SurfaceDetector" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.705, 0)
+script = ExtResource("8_65c73")
+metadata/_custom_type_script = "uid://be5yua68xhl4s"

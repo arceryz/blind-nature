@@ -1,0 +1,363 @@
+[gd_resource type="WwiseProjectData" load_steps=47 format=3 uid="uid://m7svqasqonir"]
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_dn5s6"]
+path = "\\SoundBanks\\Default Work Unit\\main_soundbank"
+type = 7
+name = "main_soundbank"
+guid = "{93EE4107-9A10-49F1-9040-E66A0CEE80BB}"
+id = 2228651116
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_abdhx"]
+children = [SubResource("WwiseTreeObject_dn5s6")]
+name = "Default Work Unit"
+id = 125608783
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_wbiwk"]
+path = "\\Master-Mixer Hierarchy\\Default Work Unit\\master_audio_bus\\user_interface"
+type = 2
+name = "user_interface"
+guid = "{FABD4886-D691-41A9-BEE7-5594B674E0AF}"
+id = 3017890412
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_n4jq4"]
+children = [SubResource("WwiseTreeObject_wbiwk")]
+name = "master_audio_bus"
+id = 2392784291
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_2b7v5"]
+children = [SubResource("WwiseTreeObject_n4jq4")]
+name = "Default Work Unit"
+id = 125608783
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_yty4k"]
+max_duration = 0.0
+min_duration = 0.0
+path = "\\Events\\Default Work Unit\\Bow\\play_bow_aim_on_target_loop"
+type = 3
+name = "play_bow_aim_on_target_loop"
+guid = "{65CF7493-D040-46D1-8B58-D278ADF328A6}"
+id = 3585160885
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_rq3ka"]
+max_duration = 1.0
+min_duration = 1.0
+path = "\\Events\\Default Work Unit\\Bow\\play_bow_arrow_release"
+type = 3
+name = "play_bow_arrow_release"
+guid = "{A93F4DF1-00FB-47AA-A4AF-57E2B3F9552B}"
+id = 3519417406
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_tfk2a"]
+max_duration = 0.75
+min_duration = 0.75
+path = "\\Events\\Default Work Unit\\Bow\\play_bow_draw"
+type = 3
+name = "play_bow_draw"
+guid = "{A652747E-D2D6-4FFA-BA9B-C923C6640059}"
+id = 249542991
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_e6o1r"]
+max_duration = 5.0
+min_duration = 5.0
+path = "\\Events\\Default Work Unit\\Bow\\play_bow_target_hit"
+type = 3
+name = "play_bow_target_hit"
+guid = "{7688CC09-DA72-4A97-A864-9A6600428387}"
+id = 764519240
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_2v05p"]
+children = [SubResource("WwiseTreeObjectEvent_yty4k"), SubResource("WwiseTreeObjectEvent_rq3ka"), SubResource("WwiseTreeObjectEvent_tfk2a"), SubResource("WwiseTreeObjectEvent_e6o1r")]
+name = "Bow"
+id = 546945295
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_tmxjl"]
+max_duration = 0.984375
+min_duration = 0.333813
+path = "\\Events\\Default Work Unit\\Humanoid\\play_footstep"
+type = 3
+name = "play_footstep"
+guid = "{38ED4E84-5C38-4A89-8C1F-E9BB1971F94D}"
+id = 1602358412
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_im43k"]
+children = [SubResource("WwiseTreeObjectEvent_tmxjl")]
+name = "Humanoid"
+id = 2510789004
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_pgs3n"]
+max_attenuation = 50.0
+max_duration = 0.0
+min_duration = 0.0
+path = "\\Events\\Default Work Unit\\Kestrel\\play_kestrel_calling_loop"
+type = 3
+name = "play_kestrel_calling_loop"
+guid = "{6C2B883D-5844-4E84-B014-DAF45F972C49}"
+id = 2191917378
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_5ewln"]
+max_attenuation = 50.0
+max_duration = 3.64054
+min_duration = 2.19227
+path = "\\Events\\Default Work Unit\\Kestrel\\play_kestrel_flying"
+type = 3
+name = "play_kestrel_flying"
+guid = "{A390CDB8-3B93-429B-9952-9D81978B4621}"
+id = 595034890
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_oeww5"]
+children = [SubResource("WwiseTreeObjectEvent_pgs3n"), SubResource("WwiseTreeObjectEvent_5ewln")]
+name = "Kestrel"
+id = 728218505
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_4djpx"]
+max_duration = 0.0
+min_duration = 0.0
+path = "\\Events\\Default Work Unit\\Nature\\play_forest"
+type = 3
+name = "play_forest"
+guid = "{C1D0CB70-B28A-4C76-958A-73ED017BCC27}"
+id = 207755397
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_mqnyt"]
+max_attenuation = 60.0
+max_duration = 0.0
+min_duration = 0.0
+path = "\\Events\\Default Work Unit\\Nature\\play_water_stream_loop"
+type = 3
+name = "play_water_stream_loop"
+guid = "{E47AAC57-807B-4C8B-B6DB-C34CE8509529}"
+id = 1516668143
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_v560u"]
+children = [SubResource("WwiseTreeObjectEvent_4djpx"), SubResource("WwiseTreeObjectEvent_mqnyt")]
+name = "Nature"
+id = 3501062356
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_yyrou"]
+max_attenuation = 50.0
+max_duration = 0.0
+min_duration = 0.0
+path = "\\Events\\Default Work Unit\\Practice Target\\play_practice_target_loop"
+type = 3
+name = "play_practice_target_loop"
+guid = "{10232DE1-3D01-46B5-8BDC-BF1344E491FA}"
+id = 15434484
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_geu6g"]
+children = [SubResource("WwiseTreeObjectEvent_yyrou")]
+name = "Practice Target"
+id = 550697233
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_5n8hf"]
+max_duration = 1.43488
+min_duration = 1.43488
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_100_percent"
+type = 3
+name = "play_100_percent"
+guid = "{0A52F099-D1D8-4EBF-9E99-2FC2027BD0EA}"
+id = 2055108469
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_tnib1"]
+max_duration = 1.33971
+min_duration = 1.33971
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_20_percent"
+type = 3
+name = "play_20_percent"
+guid = "{C3AE141D-950F-4550-A158-73A694D705B4}"
+id = 3398717162
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_o7sea"]
+max_duration = 1.17864
+min_duration = 1.17864
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_40_percent"
+type = 3
+name = "play_40_percent"
+guid = "{E0168DBD-5DE7-4582-B83F-7F767181EE1B}"
+id = 2999463988
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_lrto0"]
+max_duration = 1.42755
+min_duration = 1.42755
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_60_percent"
+type = 3
+name = "play_60_percent"
+guid = "{FC07817B-CF09-4B5B-9B97-910399CCC4F0}"
+id = 1016736550
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_i5cxa"]
+max_duration = 1.23721
+min_duration = 1.23721
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_80_percent"
+type = 3
+name = "play_80_percent"
+guid = "{3082D681-F111-41DF-9FD5-4F2DAEA51A21}"
+id = 2993918032
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_ptp8y"]
+max_duration = 0.476236
+min_duration = 0.476236
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_back"
+type = 3
+name = "play_back"
+guid = "{432BDA26-BDF5-45AE-968C-B5C02597C82E}"
+id = 1292086503
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_26l8v"]
+max_duration = 2.65327
+min_duration = 2.65327
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_follow_kestrel_to_training"
+type = 3
+name = "play_follow_kestrel_to_training"
+guid = "{3377D35F-8F82-4461-A114-C4EB4C0A682E}"
+id = 85804919
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_hir8t"]
+max_duration = 2.88104
+min_duration = 2.88104
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_home_to_pause"
+type = 3
+name = "play_home_to_pause"
+guid = "{26B8A821-8D05-4E73-9CB3-C17BD1FDCE42}"
+id = 2439834990
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_viedb"]
+max_duration = 1.95676
+min_duration = 1.95676
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_liora_blind_nature"
+type = 3
+name = "play_liora_blind_nature"
+guid = "{361EF858-06BC-4592-87F3-870F9CCD0DC6}"
+id = 1303946337
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_bq6kk"]
+max_duration = 1.4056
+min_duration = 1.4056
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_master_volume"
+type = 3
+name = "play_master_volume"
+guid = "{BB742424-7654-458E-8148-4B308A949EE3}"
+id = 2894815745
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_hssb3"]
+max_duration = 0.790658
+min_duration = 0.790658
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_pausing"
+type = 3
+name = "play_pausing"
+guid = "{D0AAA5EE-7861-43EF-B3FC-E39BEC4C271E}"
+id = 1705559833
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_0g3k4"]
+max_duration = 1.02497
+min_duration = 1.02497
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_quit_game"
+type = 3
+name = "play_quit_game"
+guid = "{54FA81DC-44DA-4DD3-9354-791C1E55DF50}"
+id = 3091790116
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_5ppdk"]
+max_duration = 1.20061
+min_duration = 1.20061
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_resume_game"
+type = 3
+name = "play_resume_game"
+guid = "{4186DB53-021A-4635-981D-B90455876AD0}"
+id = 3887485416
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_l65hi"]
+max_duration = 0.819932
+min_duration = 0.819932
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_resuming"
+type = 3
+name = "play_resuming"
+guid = "{7EDA03D4-D334-4836-BA78-2724C32E7518}"
+id = 1467001254
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_63ewg"]
+max_duration = 0.880023
+min_duration = 0.880023
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_settings"
+type = 3
+name = "play_settings"
+guid = "{297E67BA-A429-4948-9122-B23525575DFF}"
+id = 2965403633
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_myib7"]
+max_duration = 1.16991
+min_duration = 1.16991
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_start_game"
+type = 3
+name = "play_start_game"
+guid = "{A329A6B9-343E-429D-AF5B-1EEEF0B7E3D3}"
+id = 3294915283
+
+[sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_gv40o"]
+max_duration = 2.60399
+min_duration = 2.60399
+path = "\\Events\\Default Work Unit\\Voice\\User Interface\\play_use_the_sounds"
+type = 3
+name = "play_use_the_sounds"
+guid = "{E973E670-2224-4D1A-8DE1-30B4C26F761C}"
+id = 1312090858
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_0hqp2"]
+children = [SubResource("WwiseTreeObjectEvent_5n8hf"), SubResource("WwiseTreeObjectEvent_tnib1"), SubResource("WwiseTreeObjectEvent_o7sea"), SubResource("WwiseTreeObjectEvent_lrto0"), SubResource("WwiseTreeObjectEvent_i5cxa"), SubResource("WwiseTreeObjectEvent_ptp8y"), SubResource("WwiseTreeObjectEvent_26l8v"), SubResource("WwiseTreeObjectEvent_hir8t"), SubResource("WwiseTreeObjectEvent_viedb"), SubResource("WwiseTreeObjectEvent_bq6kk"), SubResource("WwiseTreeObjectEvent_hssb3"), SubResource("WwiseTreeObjectEvent_0g3k4"), SubResource("WwiseTreeObjectEvent_5ppdk"), SubResource("WwiseTreeObjectEvent_l65hi"), SubResource("WwiseTreeObjectEvent_63ewg"), SubResource("WwiseTreeObjectEvent_myib7"), SubResource("WwiseTreeObjectEvent_gv40o")]
+name = "User Interface"
+id = 216161133
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_h61g6"]
+children = [SubResource("WwiseTreeObject_0hqp2")]
+name = "Voice"
+id = 3170124113
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_q407k"]
+children = [SubResource("WwiseTreeObject_2v05p"), SubResource("WwiseTreeObject_im43k"), SubResource("WwiseTreeObject_oeww5"), SubResource("WwiseTreeObject_v560u"), SubResource("WwiseTreeObject_geu6g"), SubResource("WwiseTreeObject_h61g6")]
+name = "Default Work Unit"
+id = 125608783
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_o561g"]
+path = "\\Game Parameters\\Default Work Unit\\master_volume"
+type = 13
+name = "master_volume"
+guid = "{DA8B1A8F-54C0-4538-A36C-8EAB82F4F723}"
+id = 4179668880
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_dipfp"]
+children = [SubResource("WwiseTreeObject_o561g")]
+name = "Default Work Unit"
+id = 125608783
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_orwwv"]
+path = "\\Switches\\Default Work Unit\\surface_type\\Dirt"
+type = 10
+name = "Dirt"
+guid = "{1B4AEC59-859D-44D7-87A9-1486A8C8AB93}"
+id = 2195636714
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_4owox"]
+path = "\\Switches\\Default Work Unit\\surface_type\\Puddle"
+type = 10
+name = "Puddle"
+guid = "{5E4ABB37-E9EA-4073-A4E9-C93BA7440FD3}"
+id = 2003927601
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_d4u1n"]
+path = "\\Switches\\Default Work Unit\\surface_type"
+children = [SubResource("WwiseTreeObject_orwwv"), SubResource("WwiseTreeObject_4owox")]
+type = 11
+name = "surface_type"
+guid = "{A004835C-B7F8-4703-9EFF-39BF28D91B57}"
+id = 4064446173
+
+[sub_resource type="WwiseTreeObject" id="WwiseTreeObject_2m8v7"]
+children = [SubResource("WwiseTreeObject_d4u1n")]
+name = "Default Work Unit"
+id = 125608783
+
+[resource]
+bus_root = [SubResource("WwiseTreeObject_2b7v5")]
+bank_root = [SubResource("WwiseTreeObject_abdhx")]
+event_root = [SubResource("WwiseTreeObject_q407k")]
+game_parameter_root = [SubResource("WwiseTreeObject_dipfp")]
+switch_root = [SubResource("WwiseTreeObject_2m8v7")]
