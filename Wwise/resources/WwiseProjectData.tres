@@ -20,8 +20,11 @@ guid = "{FABD4886-D691-41A9-BEE7-5594B674E0AF}"
 id = 3017890412
 
 [sub_resource type="WwiseTreeObject" id="WwiseTreeObject_n4jq4"]
+path = "\\Master-Mixer Hierarchy\\Default Work Unit\\master_audio_bus"
 children = [SubResource("WwiseTreeObject_wbiwk")]
+type = 2
 name = "master_audio_bus"
+guid = "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
 id = 2392784291
 
 [sub_resource type="WwiseTreeObject" id="WwiseTreeObject_2b7v5"]
@@ -85,7 +88,7 @@ name = "Humanoid"
 id = 2510789004
 
 [sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_pgs3n"]
-max_attenuation = 50.0
+max_attenuation = 100.0
 max_duration = 0.0
 min_duration = 0.0
 path = "\\Events\\Default Work Unit\\Kestrel\\play_kestrel_calling_loop"
@@ -95,7 +98,7 @@ guid = "{6C2B883D-5844-4E84-B014-DAF45F972C49}"
 id = 2191917378
 
 [sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_5ewln"]
-max_attenuation = 50.0
+max_attenuation = 100.0
 max_duration = 3.64054
 min_duration = 2.19227
 path = "\\Events\\Default Work Unit\\Kestrel\\play_kestrel_flying"
@@ -134,7 +137,7 @@ name = "Nature"
 id = 3501062356
 
 [sub_resource type="WwiseTreeObjectEvent" id="WwiseTreeObjectEvent_yyrou"]
-max_attenuation = 50.0
+max_attenuation = 100.0
 max_duration = 0.0
 min_duration = 0.0
 path = "\\Events\\Default Work Unit\\Practice Target\\play_practice_target_loop"
